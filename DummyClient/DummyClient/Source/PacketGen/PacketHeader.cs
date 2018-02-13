@@ -7,15 +7,15 @@ using System.Data;
 using System.IO;
 
 namespace DummyClient
-{{
+{
     static class PacketMakeDate
-    {{
+    {
         static public string stamp()
-        {{
+        {
             return "{0}";
-        }}
-    }}
-    enum PacketType : long {{
+        }
+    }
+    enum PacketType : long {
     /*1000*/    E_C_REQ_EXIT = 1000,
     /*1001*/    E_S_ANS_EXIT = 1001,
     /*1002*/    E_I_NOTIFY_TERMINAL = 1002,
