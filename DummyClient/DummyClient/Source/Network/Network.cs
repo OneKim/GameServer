@@ -49,11 +49,11 @@ namespace DummyClient
             packetProcee_ = null;
         }
 
-        public bool connect(string ip, int port)
+        public bool connect(string ip, uint port)
         {
             client_ = new TcpClient();
             try {
-                client_.Connect(ip, port);
+                client_.Connect(ip, Convert.ToInt32(port));
             }
             catch {
                 MessageBox.Show("서버 연결 실패", "error", MessageBoxButtons.OK);
@@ -85,8 +85,13 @@ namespace DummyClient
 
         private bool isConnected()
         {
+            return state_ == NET_STATE.CONNECTED ? true : false;
+        }
+
+        private void receive()
+        {
             try {
-                while (this.isConnected) {
+                while (this.isConnected()) {
                     Byte[] packetByte = new Byte[client_.ReceiveBufferSize];
 
                     Int32 offset = 0;
@@ -103,7 +108,7 @@ namespace DummyClient
                     PacketInterface rowPacket = PacketUtil.packetAnalyzer(packetByte, ref offset, readLen);
 
                     if (rowPacket == null && this.isConnected()) {
-                        MessageBox("잘못된 패킷이 수신되었습니다", "error", MessageBoxButtons.OK);
+                        MessageBox.Show("잘못된 패킷이 수신되었습니다", "error", MessageBoxButtons.OK);
                         Application.Exit();
                     }
                     packetProcee_.run(rowPacket);
@@ -112,7 +117,7 @@ namespace DummyClient
             }
             catch (Exception e) {
                 if (this.isConnected()) {
-                    MessageBox("잘못된 처리 : " + e.ToString(), "error", MessageBoxButtons.OK);
+                    MessageBox.Show("잘못된 처리 : " + e.ToString(), "error", MessageBoxButtons.OK);
                     Application.Exit();
                 }
             }
@@ -145,7 +150,7 @@ namespace DummyClient
 
         private void hearBeat()
         {
-            while (this.isConnected) {
+            while (this.isConnected()) {
                 PK_C_NOTIFY_HEARTBEAT hearBeatPacket = new PK_C_NOTIFY_HEARTBEAT();
                 this.sendPacket(hearBeatPacket);
                 Thread.Sleep(1000);

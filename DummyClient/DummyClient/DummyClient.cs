@@ -20,7 +20,7 @@ namespace DummyClient
 
         private void DummyClient_Shown(object sender, EventArgs e)
         {
-            Program.programState_.setState(PROGRAM_STATE.LOGIN);
+            Program.programState_.setState(PROGRAM_STATE.LOGIN, null, 0);
         }
 
         private void DummyClient_FormClosed(object sender, FormClosedEventArgs e)
