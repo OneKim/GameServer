@@ -83,7 +83,7 @@ typedef void(*Function)(void *);
 #include "./Net/Packet/PacketAnalyzer.h"
 #include "./Net/Packet/PacketFactory.h"
 #include "./Net/Packet/Package.h"
-#include "./Net//Packet/PacketObfuscation.h"
+#include "./Net/Packet/PacketObfuscation.h"
 
 //컨텐츠 관련
 #include "./Contents/ContentsProcess.h"
@@ -106,3 +106,6 @@ typedef void(*Function)(void *);
 #include "./Database/ADODatabase.h"
 #include "./Database/Query.h"
 #include "./Database/DBManager.h"
+
+//전역변수
+#include "./Shutdown.h"

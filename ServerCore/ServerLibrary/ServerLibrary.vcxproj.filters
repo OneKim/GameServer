@@ -150,6 +150,9 @@
     <ClInclude Include="Net\Packet\PacketHeader.h">
       <Filter>Net\Packet</Filter>
     </ClInclude>
+    <ClInclude Include="Shutdown.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -235,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="Net\Packet\PacketObfuscation.cpp">
       <Filter>Net\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Shutdown.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
