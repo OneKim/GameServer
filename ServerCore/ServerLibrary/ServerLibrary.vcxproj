@@ -178,6 +178,7 @@
     <ClInclude Include="Util\Memory_LowFragmentationHeap.h" />
     <ClInclude Include="Util\Minidump.h" />
     <ClInclude Include="Util\Monitoring.h" />
+    <ClInclude Include="Util\ProgramValidation.h" />
     <ClInclude Include="Util\RandomMt.h" />
     <ClInclude Include="Util\Singleton.h" />
     <ClInclude Include="Util\SMTPMail.h" />

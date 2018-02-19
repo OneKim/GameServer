@@ -141,6 +141,9 @@
     <ClInclude Include="Contents\ContentsProcess.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="Util\ProgramValidation.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

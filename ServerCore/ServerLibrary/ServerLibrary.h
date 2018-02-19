@@ -74,6 +74,7 @@ typedef void(*Function)(void *);
 #include "./Util/SMTPMail.h"
 #include "./Util/Config.h"
 #include "./Util/Monitoring.h"
+#include "./Util/ProgramValidation.h"
 
 //ÆÐÅ¶µé
 #include "./Net/Packet/Stream.h"
