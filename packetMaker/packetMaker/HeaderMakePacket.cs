@@ -13,8 +13,8 @@ namespace packetMaker
         private string header_;
         private string enum_;
         private string tailer_;
-        private int packetIndexStart_ = Convert.ToInt32("2");
-        private string packetMakeDate = "2018/02/19 17:22:23";
+        private int packetIndexStart_ = Convert.ToInt32("8");
+        private string packetMakeDate = "2018/02/19 18:06:23";
 
         public HeaderMakePacket(string filePath, string formSheet)
             : base(filePath, formSheet)

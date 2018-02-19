@@ -32,7 +32,7 @@ namespace packetMaker
                 string parseToken = row[titleIdx].ToString();
                 if (parseToken.CompareTo("header") == 0)
                     header_ = row[parseIdx].ToString();
-                else if(parseToken.CompareTo("classHeader") == 0)
+                else if (parseToken.CompareTo("classHeader") == 0)
                     classHeader_ = row[parseIdx].ToString();
                 else if (parseToken.CompareTo("classTailer") == 0)
                     classTailer_ = row[parseIdx].ToString();
@@ -128,7 +128,7 @@ namespace packetMaker
                 }
                 else
                 {
-                    parseStr += tab_ + tab_ + "public" + token;
+                    parseStr += tab_ + tab_ + "public " + token;
                     parseStr += " ";
                 }
             }
@@ -147,7 +147,7 @@ namespace packetMaker
                     continue;
                 }
                 const int classNameCol = 0;
-                const int valTokenCol = 0;
+                const int valTokenCol = 1;
 
                 parseStr += string.Format(classHeader_, classRow[classNameCol].ToString());
                 string token = classRow[valTokenCol].ToString();
@@ -157,6 +157,7 @@ namespace packetMaker
                     parseStr += nextLine_;
                     parseStr += tab_ + encodeFuncHead_ + nextLine_ + tab_ + tab_ + "}" + nextLine_;
                     parseStr += tab_ + decodeFuncHead_ + nextLine_ + tab_ + tab_ + "}" + nextLine_;
+                    parseStr += classTailer_ + nextLine_;
                     continue;
                 }
                 //파라 미터 있는 패킷이면
