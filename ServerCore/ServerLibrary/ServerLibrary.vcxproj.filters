@@ -144,6 +144,9 @@
     <ClInclude Include="Util\ProgramValidation.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="Net\Packet\PacketObfuscation.h">
+      <Filter>Net\Packet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -226,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="Contents\ContentsProcess.cpp">
       <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\Packet\PacketObfuscation.cpp">
+      <Filter>Net\Packet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

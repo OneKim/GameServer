@@ -83,6 +83,7 @@ typedef void(*Function)(void *);
 #include "./Net/Packet/PacketAnalyzer.h"
 #include "./Net/Packet/PacketFactory.h"
 #include "./Net/Packet/Package.h"
+#include "./Net//Packet/PacketObfuscation.h"
 
 //ÄÁÅÙÃ÷ °ü·Ã
 #include "./Contents/ContentsProcess.h"
