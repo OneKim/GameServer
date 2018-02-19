@@ -135,8 +135,9 @@ namespace DummyClient
             return str;
         }
 
-        public static PacketInterface packetAnalyzer(Byte[] packetByte, ref Int32 offset, int packetLen)
+        public static PacketInterface packetAnalyzer(Byte[] packetByte)
         {
+            Int32 offset = 0;
             Int64 packetType = PacketUtil.decodePacketType(packetByte, ref offset);
             PacketInterface packet = PacketFactory.getPacket(packetType);
             if (packet == null) {
@@ -144,7 +145,7 @@ namespace DummyClient
             }
 
             // 데이터가 있으면 decoding 해서 넘기기
-            if (offset < packetLen) {
+            if (offset < packetByte.Length) {
                 packet.decode(packetByte, ref offset);
             }
             return packet;

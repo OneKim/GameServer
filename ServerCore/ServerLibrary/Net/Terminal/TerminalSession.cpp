@@ -37,8 +37,15 @@ void TerminalSession::sendPacket(Packet *packet)
 	array<char, SOCKET_BUF_SIZE> buffer;
 	packet_size_t packetLen[1] = { (packet_size_t)sizeof(packet_size_t) + (packet_size_t)stream.size(), };
 
+	// insert packet len
 	memcpy_s(buffer.data() + offset, buffer.max_size(), (void *)packetLen, sizeof(packetLen));
 	offset += sizeof(packetLen);
+
+	// packet obfuscation
+	PacketObfuscation::getInstance().encodingHeader((Byte*)buffer.data(), sizeof(packetLen));
+	PacketObfuscation::getInstance().encodingData((Byte*)stream.data(), stream.size());
+
+	// insert packet data
 	memcpy_s(buffer.data() + offset, buffer.max_size(), stream.data(), packetLen[0]);
 	offset += (packet_size_t)stream.size();
 
@@ -57,7 +64,9 @@ Package* TerminalSession::onRecv(size_t transferSize)
 	packet_size_t packetLen[1] = { 0, };
 
 	memcpy_s((void *)packetLen, sizeof(packetLen), (void *)rowData.data(), sizeof(packetLen));
+	PacketObfuscation::getInstance().decodingHeader((Byte*)packetLen, sizeof(packetLen));
 	offset += sizeof(packetLen);
+	PacketObfuscation::getInstance().decodingData((Byte*)rowData.data(), packetLen[0]);
 
 	//서버 간 패킷 처리
 	Packet *packet = PacketAnalyzer::getInstance().analyzer(rowData.data() + offset, packetLen[0]);

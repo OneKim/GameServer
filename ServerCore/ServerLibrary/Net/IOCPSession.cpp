@@ -34,6 +34,7 @@ int32_t IoData::setupTotalBytes()
 	packet_size_t packetLen[1] = { 0, };
 	if (totalBytes_ == 0) {		
 		memcpy_s((void *)packetLen, sizeof(packetLen), (void *)buffer_.data(), sizeof(packetLen));
+		PacketObfuscation::getInstance().decodingHeader((Byte*)&packetLen, sizeof(packetLen));
 		totalBytes_ = (size_t)packetLen[0];
 	}
 	offset += sizeof(packetLen);
@@ -77,6 +78,11 @@ bool IoData::setData(Stream &stream)
 	// insert packet len
 	memcpy_s(buf + offset, buffer_.max_size(), (void *)packetLen, sizeof(packetLen));
 	offset += sizeof(packetLen);
+
+	// packet obfuscation
+	PacketObfuscation::getInstance().encodingHeader((Byte*)buf, sizeof(packetLen));
+	PacketObfuscation::getInstance().encodingData((Byte*)stream.data(), stream.size());
+
 	// insert packet data
 	memcpy_s(buf + offset, buffer_.max_size(), stream.data(), (int32_t)stream.size());
 	offset += (packet_size_t)stream.size();
@@ -189,7 +195,7 @@ Package* IOCPSession::onRecv(size_t transferSize)
 	packet_size_t packetDataSize = packet_size_t(ioData_[IO_READ].totalByte() - sizeof(packet_size_t));
 	Byte *packetData = (Byte*) ioData_[IO_READ].data() + offset;
 
-	PacketObfuscation::getInstance().decoding(packetData, packetDataSize);
+	PacketObfuscation::getInstance().decodingData(packetData, packetDataSize);
 	Packet *packet = PacketAnalyzer::getInstance().analyzer((const char *)packetData, packetDataSize);
 	if (packet == nullptr) {
 		SLog(L"! invalid packet");

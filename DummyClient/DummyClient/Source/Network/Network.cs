@@ -96,6 +96,8 @@ namespace DummyClient
 
                     Int32 offset = 0;
                     Int32 readLen = stream_.Read(packetByte, offset, packetByte.Length);
+
+                    PacketObfuscation.decodingHeader(ref packetByte, sizeof(Int32));
                     Int32 packetLen = PacketUtil.decodePacketLen(packetByte, ref offset);
                     while (readLen < packetLen) {
                         Byte[] remainPacket = new Byte[client_.ReceiveBufferSize];
@@ -105,7 +107,11 @@ namespace DummyClient
                         readLen += remainLen;
                     }
 
-                    PacketInterface rowPacket = PacketUtil.packetAnalyzer(packetByte, ref offset, readLen);
+                    Byte[] packetData = new Byte[client_.ReceiveBufferSize];
+                    Buffer.BlockCopy(packetByte, offset, packetData, 0, readLen - offset);
+                    PacketObfuscation.decodingData(ref packetData, packetData.Length);
+
+                    PacketInterface rowPacket = PacketUtil.packetAnalyzer(packetData);                    
 
                     if (rowPacket == null && this.isConnected()) {
                         MessageBox.Show("잘못된 패킷이 수신되었습니다", "error", MessageBoxButtons.OK);
@@ -127,18 +133,23 @@ namespace DummyClient
         {
             try {
                 packet.encode();
-                MemoryStream packetData = new MemoryStream();
+                MemoryStream packetBlock = new MemoryStream();
 
                 Int32 packetLen = sizeof(Int32) + (Int32)packet.getStream().Length;
 
-                packetData.Write(BitConverter.GetBytes(packetLen), 0, sizeof(Int32));
-                packetData.Write(packet.getStream().ToArray(), 0, (Int32)packet.getStream().Length);
+                Byte[] packetHeader = BitConverter.GetBytes(packetLen);
+                PacketObfuscation.encodingHeader(ref packetHeader, (int)packetHeader.Length);
+                packetBlock.Write(packetHeader, 0, (Int32)packetHeader.Length);
 
-                Byte[] packetBytes = packetData.ToArray();
-                stream_.Write(packetBytes, 0, (int)packetData.Length);
+                Byte[] packetData = packet.getStream().ToArray();
+                PacketObfuscation.encodingData(ref packetData, (int)packetData.Length);
+                packetBlock.Write(packetData, 0, (Int32)packetData.Length);
+
+                Byte[] packetBytes = packetBlock.ToArray();
+                stream_.Write(packetBytes, 0, (int)packetBlock.Length);
                 stream_.Flush();
 
-                packetData = null;
+                packetBlock = null;
             }
             catch (Exception e) {
                 if (this.isConnected()) {
