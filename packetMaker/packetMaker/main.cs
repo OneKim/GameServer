@@ -10,7 +10,7 @@ namespace packetMaker
     class main
     {
         //프로젝트 놓은 디렉토리 설정
-        static string patch_ = "C:\\Users\\Choisungin\\Desktop\\ServerProgramming";
+        static string patch_ = "C:\\Users\\Choisungin\\Desktop\\GameServer\\trunk";
         static string serverProjectName_ = "\\ServerCore\\ServerLibrary";
         static string serverProjectPath_ = patch_ + serverProjectName_ + "\\Net\\Packet";
 

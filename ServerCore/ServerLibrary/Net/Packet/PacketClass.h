@@ -15,13 +15,6 @@ class PK_C_REQ_EXIT : public Packet
 public:
     PacketType type() { return E_C_REQ_EXIT; }
 
-
-    void encode(Stream &stream) {
-        stream << (Int64) this->type();
-     }
-
-    void decode(Stream &stream) {
-     }
 };
 
 class PK_S_ANS_EXIT : public Packet
@@ -29,12 +22,6 @@ class PK_S_ANS_EXIT : public Packet
 public:
     PacketType type() { return E_S_ANS_EXIT; }
 
-    void encode(Stream &stream) {
-        stream << (Int64) this->type();
-     }
-
-    void decode(Stream &stream) {
-     }
 };
 
 class PK_I_NOTIFY_TERMINAL : public Packet
@@ -42,12 +29,6 @@ class PK_I_NOTIFY_TERMINAL : public Packet
 public:
     PacketType type() { return E_I_NOTIFY_TERMINAL; }
 
-    void encode(Stream &stream) {
-        stream << (Int64) this->type();
-     }
-
-    void decode(Stream &stream) {
-     }
 };
 
 class PK_C_NOTIFY_HEARTBEAT : public Packet
@@ -55,13 +36,6 @@ class PK_C_NOTIFY_HEARTBEAT : public Packet
 public:
     PacketType type() { return E_C_NOTIFY_HEARTBEAT; }
 
-
-    void encode(Stream &stream) {
-        stream << (Int64) this->type();
-     }
-
-    void decode(Stream &stream) {
-     }
 };
 
 class PK_C_REQ_ID_PW : public Packet
@@ -89,13 +63,6 @@ class PK_S_ANS_ID_PW_FAIL : public Packet
 public:
     PacketType type() { return E_S_ANS_ID_PW_FAIL; }
 
-
-    void encode(Stream &stream) {
-        stream << (Int64) this->type();
-     }
-
-    void decode(Stream &stream) {
-     }
 };
 
 class PK_S_ANS_ID_PW_SUCCESS : public Packet

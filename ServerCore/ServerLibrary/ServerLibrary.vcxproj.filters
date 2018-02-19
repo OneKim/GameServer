@@ -147,6 +147,9 @@
     <ClInclude Include="Net\Packet\PacketObfuscation.h">
       <Filter>Net\Packet</Filter>
     </ClInclude>
+    <ClInclude Include="Net\Packet\PacketHeader.h">
+      <Filter>Net\Packet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

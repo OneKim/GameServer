@@ -80,8 +80,8 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_C_REQ_ID_PW; }
         Int64 type() { return (Int64) PacketType.E_C_REQ_ID_PW; }
-          public string           id_;
-          public string           password_;
+          publicstring           id_;
+          publicstring           password_;
 
          void PacketInterface.encode()
         {
@@ -120,9 +120,9 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_S_ANS_ID_PW_SUCCESS; }
         Int64 type() { return (Int64) PacketType.E_S_ANS_ID_PW_SUCCESS; }
-          public string           ip_;
-          public UInt32           port_;
-          public string           name_;
+          publicstring           ip_;
+          publicUInt32           port_;
+          publicstring           name_;
 
          void PacketInterface.encode()
         {
@@ -146,9 +146,9 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_I_DB_REQ_ID_PW; }
         Int64 type() { return (Int64) PacketType.E_I_DB_REQ_ID_PW; }
-          public UInt64           clientId_;
-          public string           id_;
-          public string           password_;
+          publicUInt64           clientId_;
+          publicstring           id_;
+          publicstring           password_;
 
          void PacketInterface.encode()
         {
@@ -172,9 +172,9 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_I_DB_ANS_ID_PW; }
         Int64 type() { return (Int64) PacketType.E_I_DB_ANS_ID_PW; }
-          public UInt64           clientId_;
-          public UInt64           oidAccountId_;
-          public Byte           result_;
+          publicUInt64           clientId_;
+          publicUInt64           oidAccountId_;
+          publicByte           result_;
 
          void PacketInterface.encode()
         {
@@ -198,8 +198,8 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_I_CHTTING_NOTIFY_ID; }
         Int64 type() { return (Int64) PacketType.E_I_CHTTING_NOTIFY_ID; }
-          public UInt64           clientId_;
-          public UInt64           oidAccountId_;
+          publicUInt64           clientId_;
+          publicUInt64           oidAccountId_;
 
          void PacketInterface.encode()
         {
@@ -221,8 +221,8 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_I_DB_REQ_LOAD_DATA; }
         Int64 type() { return (Int64) PacketType.E_I_DB_REQ_LOAD_DATA; }
-          public UInt64           clientId_;
-          public UInt64           oidAccountId_;
+          publicUInt64           clientId_;
+          publicUInt64           oidAccountId_;
 
          void PacketInterface.encode()
         {
@@ -244,9 +244,9 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_I_DB_ANS_PARSE_DATA; }
         Int64 type() { return (Int64) PacketType.E_I_DB_ANS_PARSE_DATA; }
-          public UInt64           clientId_;
-          public string           name_;
-          public Byte           result_;
+          publicUInt64           clientId_;
+          publicstring           name_;
+          publicByte           result_;
 
          void PacketInterface.encode()
         {
@@ -270,9 +270,9 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_I_LOGIN_NOTIFY_ID_LOADED; }
         Int64 type() { return (Int64) PacketType.E_I_LOGIN_NOTIFY_ID_LOADED; }
-          public UInt64           clientId_;
-          public string           name_;
-          public Byte           result_;
+          publicUInt64           clientId_;
+          publicstring           name_;
+          publicByte           result_;
 
          void PacketInterface.encode()
         {
@@ -296,7 +296,7 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_C_REQ_REGIST_CHATTING_NAME; }
         Int64 type() { return (Int64) PacketType.E_C_REQ_REGIST_CHATTING_NAME; }
-          public string           name_;
+          publicstring           name_;
 
          void PacketInterface.encode()
         {
@@ -316,7 +316,7 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_C_REQ_CHATTING; }
         Int64 type() { return (Int64) PacketType.E_C_REQ_CHATTING; }
-          public string           text_;
+          publicstring           text_;
 
          void PacketInterface.encode()
         {
@@ -336,8 +336,8 @@ namespace DummyClient
     {
         Int64 PacketInterface.type() { return (Int64) PacketType.E_S_ANS_CHATTING; }
         Int64 type() { return (Int64) PacketType.E_S_ANS_CHATTING; }
-          public string           name_;
-          public string           text_;
+          publicstring           name_;
+          publicstring           text_;
 
          void PacketInterface.encode()
         {

@@ -155,6 +155,7 @@
     <ClInclude Include="Net\IOCPSession.h" />
     <ClInclude Include="Net\Packet\Package.h" />
     <ClInclude Include="Net\Packet\PacketAnalyzer.h" />
+    <ClInclude Include="Net\Packet\PacketHeader.h" />
     <ClInclude Include="Net\Packet\Stream.h" />
     <ClInclude Include="Net\Packet\PacketObfuscation.h" />
     <ClInclude Include="Net\Server.h" />

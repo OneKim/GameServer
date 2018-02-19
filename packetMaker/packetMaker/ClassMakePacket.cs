@@ -145,6 +145,7 @@ namespace packetMaker
                 if (valToken == "")
                 {
                     parseStr += classEndMacro;
+                    continue;
                 }
                 parseStr += parseMemberVal(classRow);
                 parseStr += parseEncode(classRow);
