@@ -123,6 +123,7 @@ void SessionManager::runCommand(wstr_t cmdLine)
 
 void SessionManager::commandFuncInitialize()
 {
+#if 0
 	//기본적인 3개만 생성, 이후 늘어나면 별도 클래스로 분리
 	auto notifyFunc = [](SessionList *sessionList, wstr_t *arg) {
 		auto eachFunc = [arg](void *atom) {
@@ -178,5 +179,5 @@ void SessionManager::commandFuncInitialize()
 	serverCommand_.insert(make_pair(L"/notify", notifyFunc));
 	serverCommand_.insert(make_pair(L"/kickoff", kickoffFunc));
 	serverCommand_.insert(make_pair(L"/exit", exitFunc));
+#endif
 }
-

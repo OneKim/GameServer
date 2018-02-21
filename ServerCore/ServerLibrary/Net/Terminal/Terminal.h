@@ -31,6 +31,7 @@ public:
 	void					initialize(xmlNode_t *config);
 	void					sendPacket(Packet *packet);
 	const char*				ip();
+	int						port() { return port_; }
 
 private:
 	void					connectProcess();

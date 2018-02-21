@@ -25,6 +25,9 @@
     <Filter Include="Contents">
       <UniqueIdentifier>{cdb848c4-fc95-4926-acc8-a56a1f0bbf5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Database">
+      <UniqueIdentifier>{52e97b2b-d569-4a77-8e83-ac56c7b350a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -153,6 +156,24 @@
     <ClInclude Include="Shutdown.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Database\ADODatabase.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\Database.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\DBManager.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\Query.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\QueryRecord.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\QueryStatement.h">
+      <Filter>Database</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -241,6 +262,21 @@
     </ClCompile>
     <ClCompile Include="Shutdown.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\ADODatabase.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\DBManager.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\Query.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\QueryRecord.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\QueryStatement.cpp">
+      <Filter>Database</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

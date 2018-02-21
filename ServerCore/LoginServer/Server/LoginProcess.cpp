@@ -8,17 +8,18 @@ LoginProcess::LoginProcess()
 
 void LoginProcess::registSubPacketFunc()
 {
-	runFuncTable_.insert(make_pair(E_C_REQ_ID_PW, &LoginProcess::Packet_ID_PW));
-	runFuncTable_.insert(make_pair(E_I_DB_ANS_ID_PW, &LoginProcess::IDB_Packet_ID_PW));
-	runFuncTable_.insert(make_pair(E_C_REQ_CHATTING, &LoginProcess::Packet_Chatting));
+#define INSERT_PACKET_PROCESS(type)			runFuncTable_.insert(make_pair(E_##type, &LoginProcess::##type))
+
+	INSERT_PACKET_PROCESS(C_REQ_ID_PW);
+	INSERT_PACKET_PROCESS(I_DB_ANS_ID_PW);
+	INSERT_PACKET_PROCESS(I_LOGIN_NOTIFY_ID_LOADED);
 }
 
 //------------------------------------------------------------------------//
 //패킷 처리 정의
-void LoginProcess::Packet_ID_PW(Session *session, Packet *rowPacket)
+void LoginProcess::C_REQ_ID_PW(Session *session, Packet *rowPacket)
 {
 	PK_C_REQ_ID_PW *packet = (PK_C_REQ_ID_PW *)rowPacket;
-	SLog(L"* id/pw packet: %S / %S", packet->id_, packet->password_.c_str());
 
 	PK_I_DB_REQ_ID_PW dbPacket;
 	dbPacket.clientId_ = (UInt64)session->id();
@@ -29,7 +30,7 @@ void LoginProcess::Packet_ID_PW(Session *session, Packet *rowPacket)
 	terminal->sendPacket(&dbPacket);
 }
 
-void LoginProcess::IDB_Packet_ID_PW(Session *session, Packet *rowPacket)
+void LoginProcess::I_DB_ANS_ID_PW(Session *session, Packet *rowPacket)
 {
 	PK_I_DB_ANS_ID_PW *packet = (PK_I_DB_ANS_ID_PW *)rowPacket;
 	SLog(L"* id/ pw result = %d", packet->result_);
@@ -45,22 +46,38 @@ void LoginProcess::IDB_Packet_ID_PW(Session *session, Packet *rowPacket)
 		clientSession->sendPacket(&ansPacket);
 		return;
 	}
-	else {
-		PK_S_ANS_ID_PW_SUCCESS ansPacket;
-		clientSession->sendPacket(&ansPacket);
-		return;
+
+	PK_I_CHTTING_NOTIFY_ID iPacket;
+	iPacket.oidAccountId_ = packet->oidAccountId_;
+	iPacket.clientId_ = packet->clientId_;
+	Terminal *terminal = TerminalManager::getInstance().terminal(L"ChattingServer");
+	if (terminal == nullptr) {
+		SLog(L"! Chatting Server terminal is not connected");
 	}
+	terminal->sendPacket(&iPacket);
 }
 
-void LoginProcess::Packet_Chatting(Session *session, Packet *rowPacket)
+void LoginProcess::I_LOGIN_NOTIFY_ID_LOADED(Session *session, Packet *rowPacket)
 {
-	PK_C_REQ_CHATTING *packet = (PK_C_REQ_CHATTING *)rowPacket;
-	SLog(L"* chatting packet: %S", packet->text_.c_str());
+	PK_I_LOGIN_NOTIFY_ID_LOADED *packet = (PK_I_LOGIN_NOTIFY_ID_LOADED *)rowPacket;
 
-	PK_S_ANS_CHATTING retPacket;
-	retPacket.name_ = "test ";			//XXX 임시 코드, 패킷 테스트로 넣었음
-	retPacket.text_ = "re : ";
-	retPacket.text_ += packet->text_;
-	SLog(L"* send message %S, %S", retPacket.name_.c_str(), retPacket.text_.c_str());
-	session->sendPacket(&retPacket);
+	const int dataNull = 0;
+	if (packet->result_ == dataNull) {
+		return;
+	}
+	Session *clientSession = SessionManager::getInstance().session(packet->clientId_);
+	if (clientSession == nullptr) {
+		return;
+	}
+	Terminal *terminal = TerminalManager::getInstance().terminal(L"ChattingServer");
+	if (terminal == nullptr) {
+		SLog(L"! Chatting Server terminal is not connected");
+	}
+	PK_S_ANS_ID_PW_SUCCESS ansPacket;
+	ansPacket.ip_ = terminal->ip();
+	ansPacket.port_ = terminal->port();
+	ansPacket.name_ = packet->name_;
+
+	SLog(L"* loaded [%S] user name, form [%S]", ansPacket.name_.c_str(), session->clientAddress().c_str());
+	clientSession->sendPacket(&ansPacket);
 }

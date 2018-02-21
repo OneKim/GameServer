@@ -7,7 +7,7 @@ public:
 	LoginProcess();
 private:
 	void		registSubPacketFunc();
-	static void	Packet_ID_PW(Session *session, Packet *rowPacket);
-	static void	IDB_Packet_ID_PW(Session *session, Packet *rowPacket);
-	static void	Packet_Chatting(Session *session, Packet *rowPacket);
+	static void	C_REQ_ID_PW(Session *session, Packet *rowPacket);
+	static void	I_DB_ANS_ID_PW(Session *session, Packet *rowPacket);
+	static void	I_LOGIN_NOTIFY_ID_LOADED(Session *session, Packet *rowPacket);
 };

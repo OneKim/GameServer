@@ -1,34 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Common">
-      <UniqueIdentifier>{9361fd87-b93e-4f62-ad41-a385cacf5570}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Server">
-      <UniqueIdentifier>{fb031a6b-6f2f-41f2-b118-12ece1ad2a30}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Server\LoginProcess.h">
+    <ClInclude Include="Server\ChattingProcess.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\User.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\UserManager.h">
       <Filter>Server</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LoginServer.cpp">
+    <ClCompile Include="ChattingServer.cpp">
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Server\LoginProcess.cpp">
+    <ClCompile Include="Server\ChattingProcess.cpp">
       <Filter>Server</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{dde147a3-4a9b-4d6e-bbb8-cac774f684a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{24d83f32-f8f7-4760-baab-60c8a700d086}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml" />

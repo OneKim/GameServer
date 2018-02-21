@@ -32,10 +32,10 @@ public:
 	
 	void	addParam(CHAR *value);
 	void	addParam(WCHAR *value);
-	void	addParam(INT32 *value);
-	void	addParam(UINT32 *value);
-	void	addParam(INT64 *value);
-	void	addParam(UINT64 *value);
-	void	addParam(FLOAT *value);
-	void	addParam(DOUBLE *value);
+	void	addParam(INT32 value);
+	void	addParam(UINT32 value);
+	void	addParam(INT64 value);
+	void	addParam(UINT64 value);
+	void	addParam(FLOAT value);
+	void	addParam(DOUBLE value);
 };

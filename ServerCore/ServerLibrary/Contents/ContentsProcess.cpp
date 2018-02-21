@@ -45,9 +45,9 @@ void ContentsProcess::initialize(xml_t *config)
 
 void ContentsProcess::registDefaultPacketFunc()
 {
-	runFuncTable_.insert(make_pair(E_C_NOTIFY_HEARTBEAT, &ContentsProcess::Packet_HearBeat));
+	runFuncTable_.insert(make_pair(E_C_NOTIFY_HEARTBEAT, &ContentsProcess::Packet_HeartBeat));
 	runFuncTable_.insert(make_pair(E_I_NOTIFY_TERMINAL, &ContentsProcess::Packet_Notify_Terminal));
-	runFuncTable_.insert(make_pair(E_C_REQ_EXIT, &ContentsProcess::Packet_Exit));
+	runFuncTable_.insert(make_pair(E_C_REQ_EXIT, &ContentsProcess::C_REQ_EXIT));
 }
 
 void ContentsProcess::putPackage(Package *package)
@@ -58,13 +58,16 @@ void ContentsProcess::putPackage(Package *package)
 void ContentsProcess::run(Package *package)
 {
 	PacketType type = package->packet_->type();
-	RunFunc runFunction = runFuncTable_.at(type);
-	if (runFunction == nullptr) {
+	auto itr = runFuncTable_.find(type);
+	if (itr == runFuncTable_.end()) {
 		SLog(L"! invalid packet runFunction. type[%d]", type);
 		package->session_->onClose();
 		return;
 	}
+	RunFunc runFunction = itr->second;
+#ifdef _DEBUG
 	SLog(L"*** [%d] packet run ***", type);
+#endif //_DEBUG
 	runFunction(package->session_, package->packet_);
 }
 
@@ -89,25 +92,25 @@ void ContentsProcess::process()
 
 //------------------------------------------------------------------------//
 // 기본 패킷 기능 구현
-void ContentsProcess::Packet_HearBeat(Session *session, Packet *rowPacket)
+void ContentsProcess::Packet_HeartBeat(Session *session, Packet *rowPacket)
 {
-	if (session ->type() != SESSION_TYPE_CLIENT) {
+	if (session->type() != SESSION_TYPE_CLIENT) {
 		return;
 	}
 	session->updateHeartBeat();
 }
 
-void ContentsProcess::Packet_Notify_Terminal(Session * session, Packet *rowPacket)
+void ContentsProcess::Packet_Notify_Terminal(Session *session, Packet *rowPacket)
 {
 	session->setType(SESSION_TYPE_TERMINAL);
-	SLog(L"* [%S] Terminal accepted.", session->clientAddress().c_str());
+	SLog(L"* [%s] Terminal accepted.", session->clientAddress().c_str());
 }
 
-void ContentsProcess::Packet_Exit(Session *session, Packet *rowPacket)
+void ContentsProcess::C_REQ_EXIT(Session *session, Packet *rowPacket)
 {
 	//클라이언트 read thread를 종료시켜 주기 위해 처리
 	PK_C_REQ_EXIT *packet = (PK_C_REQ_EXIT *)rowPacket;
 	PK_S_ANS_EXIT ansPacket;
-	SLog(L"* recv exit packet by [%S]", session->clientAddress().c_str());
+	SLog(L"* recv exit packet by [%s]", session->clientAddress().c_str());
 	session->sendPacket(&ansPacket);
 }

@@ -8,7 +8,37 @@ DBAgentProcess::DBAgentProcess()
 
 void DBAgentProcess::registSubPacketFunc()
 {
-	runFuncTable_.insert(make_pair(E_I_DB_REQ_ID_PW, &DBAgentProcess::IPacket_ID_PW));
+#define INSERT_PACKET_PROCESS(type)		runFuncTable_.insert(make_pair(E_##type, &DBAgentProcess::##type))
+
+	INSERT_PACKET_PROCESS(I_DB_REQ_ID_PW);
+	INSERT_PACKET_PROCESS(I_DB_REQ_LOAD_DATA);
+}
+
+void DBAgentProcess::I_DB_REQ_ID_PW(Session *session, Packet *rowPacket)
+{
+	PK_I_DB_REQ_ID_PW *packet = (PK_I_DB_REQ_ID_PW *)rowPacket;
+
+	QI_DB_REQ_ID_PW *query = new QI_DB_REQ_ID_PW();						// 쿼리 만들기
+	query->clientId_ = packet->clientId_;
+
+	QueryStatement *statement = query->statement();
+	statement->addParam((char *)packet->id_.c_str());					// 파라미터 계속 붙여나가기
+	statement->addParam((char *)packet->password_.c_str());
+
+	DBManager::getInstance().pushQuery(query);
+}
+
+void DBAgentProcess::I_DB_REQ_LOAD_DATA(Session *session, Packet *rowPacket)
+{
+	PK_I_DB_REQ_LOAD_DATA *packet = (PK_I_DB_REQ_LOAD_DATA *)rowPacket;
+
+	QI_DB_REQ_LOAD_DATA *query = new QI_DB_REQ_LOAD_DATA();
+	query->clientId_ = packet->clientId_;
+
+	QueryStatement *statement = query->statement();
+	statement->addParam(packet->oidAccountId_);
+
+	DBManager::getInstance().pushQuery(query);
 }
 
 class Query_ID_PW : public Query
@@ -51,19 +81,3 @@ public:
 		terminal->sendPacket(&iPacket);
 	}
 };
-
-void DBAgentProcess::IPacket_ID_PW(Session *session, Packet *rowPacket)
-{
-	PK_I_DB_REQ_ID_PW *packet = (PK_I_DB_REQ_ID_PW *)rowPacket;
-
-	// DB 쿼리 사용 및 결과 데이터 얻어오는 방법
-	Query_ID_PW *query = new Query_ID_PW();				// 쿼리 만들기
-	query->clientId_ = packet->clientId_;
-
-	QueryStatement *statement = query->statement();
-
-	statement->addParam((char *)packet->id_.c_str());	// 파라 미터 계속 붙여나가기
-	statement->addParam((char *)packet->password_.c_str());
-
-	DBManager::getInstance().pushQuery(query);
-}

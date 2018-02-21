@@ -55,32 +55,32 @@ void QueryStatement::addParam(WCHAR *value)
 	this->addArg(L"'%s'", value);
 }
 
-void QueryStatement::addParam(INT32 *value)
+void QueryStatement::addParam(INT32 value)
 {
 	this->addArg(L"'%d'", value);
 }
 
-void QueryStatement::addParam(UINT32 *value)
+void QueryStatement::addParam(UINT32 value)
 {
 	this->addArg(L"'%u'", value);
 }
 
-void QueryStatement::addParam(INT64 *value)
+void QueryStatement::addParam(INT64 value)
 {
 	this->addArg(L"'%lld'", value);
 }
 
-void QueryStatement::addParam(UINT64 *value)
+void QueryStatement::addParam(UINT64 value)
 {
 	this->addArg(L"'%llu'", value);
 }
 
-void QueryStatement::addParam(FLOAT *value)
+void QueryStatement::addParam(FLOAT value)
 {
 	this->addArg(L"'%f'", value);
 }
 
-void QueryStatement::addParam(DOUBLE *value)
+void QueryStatement::addParam(DOUBLE value)
 {
 	this->addArg(L"'%lf'", value);
 }

@@ -45,6 +45,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -77,6 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -106,13 +109,18 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)..\Output\$(ConfigurationName)\$(ProjectName)\$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -152,6 +160,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Contents\ContentsProcess.h" />
+    <ClInclude Include="Database\ADODatabase.h" />
+    <ClInclude Include="Database\Database.h" />
+    <ClInclude Include="Database\DBManager.h" />
+    <ClInclude Include="Database\Query.h" />
+    <ClInclude Include="Database\QueryRecord.h" />
+    <ClInclude Include="Database\QueryStatement.h" />
     <ClInclude Include="Net\IOCPSession.h" />
     <ClInclude Include="Net\Packet\Package.h" />
     <ClInclude Include="Net\Packet\PacketAnalyzer.h" />
@@ -196,6 +210,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Contents\ContentsProcess.cpp" />
+    <ClCompile Include="Database\ADODatabase.cpp" />
+    <ClCompile Include="Database\DBManager.cpp" />
+    <ClCompile Include="Database\Query.cpp" />
+    <ClCompile Include="Database\QueryRecord.cpp" />
+    <ClCompile Include="Database\QueryStatement.cpp" />
     <ClCompile Include="Net\IOCPSession.cpp" />
     <ClCompile Include="Net\Packet\PacketAnalyzer.cpp" />
     <ClCompile Include="Net\Packet\PacketObfuscation.cpp" />

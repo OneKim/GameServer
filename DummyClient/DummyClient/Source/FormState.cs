@@ -31,16 +31,6 @@ namespace DummyClient
             form_.Hide();
         }
 
-        //HACK : 이곳 매직코드는 처음 접속하는
-        //       로그인 서버 ip랑 port 번호임
-        private string loginIp_ = "127.0.0.1";
-        private uint loginPort_ = 9000;
-
-        public bool connectToLoginServer()
-        {
-            return connectToServer(loginIp_, loginPort_);
-        }
-
         public bool connectToServer(string ip, uint port)
         {
             if (network_ == null)
@@ -57,11 +47,16 @@ namespace DummyClient
 
     internal class LoginFormState : FormState
     {
+        //HACK : 이곳 매직코드는 처음 접속하는
+        //       로그인 서버 ip랑 port 번호임
+        private string loginIp_ = "127.0.0.1";
+        private uint loginPort_ = 9000;
+
         public override void open(string ip, uint port)
         {
             form_ = new LoginForm();
             setForm();
-            if (!base.connectToLoginServer()) {
+            if (!base.connectToServer(loginIp_, loginPort_)) {
                 var result = MessageBox.Show("로그인 서버 연결에 실패. 다시 연결 시도 해볼까요?",
                                               "error", MessageBoxButtons.RetryCancel);
                 if (result != DialogResult.Retry) {

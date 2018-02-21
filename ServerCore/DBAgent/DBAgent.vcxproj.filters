@@ -4,6 +4,9 @@
     <Filter Include="Common">
       <UniqueIdentifier>{2655ff7a-b546-4fd2-988d-3a77c584d90d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Query">
+      <UniqueIdentifier>{98534707-7051-430b-8b21-eb3093a9f528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -14,6 +17,12 @@
     </ClInclude>
     <ClInclude Include="DBAgentProcess.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Query\QI_DB_REQ_ID_PW.h">
+      <Filter>Query</Filter>
+    </ClInclude>
+    <ClInclude Include="Query\QI_DB_REQ_LOAD_DATA.h">
+      <Filter>Query</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -26,5 +35,8 @@
     <ClCompile Include="DBAgentProcess.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="config.xml" />
   </ItemGroup>
 </Project>

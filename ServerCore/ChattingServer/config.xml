@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <App>
-  <Name>LoginServer</Name>
+  <Name>Chatting Server</Name>
   <Server>
     <IP>127.0.0.1</IP>
-    <Port>9000</Port>
+    <Port>9200</Port>
     <ThreadCount>5</ThreadCount>
   </Server>
   <Terminal>
-    <ChattingServer>
+    <LoginServer>
       <IP>127.0.0.1</IP>
-      <Port>9200</Port>
-    </ChattingServer>
+      <Port>9000</Port>
+    </LoginServer>
     <DBAgent>
       <IP>127.0.0.1</IP>
       <Port>9100</Port>
