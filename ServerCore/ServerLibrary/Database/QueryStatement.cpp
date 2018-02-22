@@ -16,7 +16,7 @@ QueryStatement::~QueryStatement()
 
 void QueryStatement::setQuery(WCHAR *query, QUERY_TYPE type /*= QUERY_NOT_RETURN*/)
 {
-	query_ = query_;
+	query_ = query;
 	type_ = type;
 }
 
@@ -34,7 +34,7 @@ QUERY_TYPE QueryStatement::type()
 template<typename T>
 void QueryStatement::addArg(WCHAR *fmt, T value)
 {
-	array<WCHAR, DB_PRAM_SIZE> buffer;
+	array<WCHAR, DB_PARAM_SIZE> buffer;
 	snwprintf(buffer, fmt, value);
 	if (paramCount_++) {
 		query_ += L", ";

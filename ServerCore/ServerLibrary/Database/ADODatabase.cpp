@@ -8,7 +8,7 @@ ADODatabase::ADODatabase()
 	::CoInitialize(NULL);
 	state_ = DB_STOP;
 
-	dbConnection_.CreateInstance(__uuidof(ADODB::Connection));
+	dbConnection_.CreateInstance(__uuidof(ADODB::Connection));	
 	if (dbConnection_ == NULL) {
 		SErrLog(L"! Database init fail");
 	}
@@ -65,7 +65,8 @@ bool ADODatabase::connect()
 bool ADODatabase::connect(const WCHAR *provider, const WCHAR *serverName, const WCHAR *dbName, const WCHAR *id, const WCHAR *password)
 {
 	array<WCHAR, SIZE_128> buffer;
-	snwprintf(buffer, L"Provider=%s;Server=%s;Database=%s;Uid=%s;Pwd=%s;", provider, serverName, dbName, id, password);
+	snwprintf(buffer, L"Provider=%s;Server=%s;Database=%s;Uid=%s;Pwd=%s;", provider, serverName, dbName, id, password);	
+	connectionStr_ = buffer.data();
 	SLog(L"* [%s]DB try connection provider = %s", dbName_.c_str(), provider);
 
 	return this->connect();
@@ -75,16 +76,20 @@ bool ADODatabase::connect(const WCHAR *serverName, const WCHAR *dbName, const WC
 {
 	dbName_ = dbName;
 
-	//mssql 2012이후로 접속시
-	if (this->connect(L"SQLNCLI11", serverName, dbName, id, password)) {
-		return true;
+	SLog(L"* connect try : %s, %s, %s", dbName, id, password);
+
+	for (int index = 10; index < 20; ++index) {
+		array<WCHAR, SIZE_64> mssqlName;
+		snwprintf(mssqlName, L"SQLNCLI%d", index);
+		if (this->connect(mssqlName.data(), serverName, dbName, id, password)) {
+			SLog(L"* database %s : %s connect", mssqlName, dbName);
+			return true;
+		}
 	}
-	//mssql 2010이후로 접속시
-	if (this->connect(L"SQLNCLI10", serverName, dbName, id, password)) {
-		return true;
-	}
+
 	//mssql 2005, 2008로 접속시
 	if (this->connect(L"SQLNCLI", serverName, dbName, id, password)) {
+		SLog(L"* database SQLNCLI : %s connect", dbName);
 		return true;
 	}
 	return false;

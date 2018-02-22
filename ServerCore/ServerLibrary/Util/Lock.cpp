@@ -81,7 +81,7 @@ LockSafeScope::LockSafeScope(Lock *lock, LPCWSTR fileName, int lineNo)
 #ifdef STERN_MODE
 		SErrLog(L"! [%s]lock and [%s]lock is dead detecting!", deadLock->name(), lock->name());
 #else
-		std::lock(lock->mutex(), deadLock->mutex());
+		std::lock(lock_->mutex(), deadLock->mutex());
 		SLog(L"!!! [%s]lock and [%s]lock is dead detecting!", deadLock->name(), lock->name());
 #endif
 		return;
@@ -100,7 +100,7 @@ LockSafeScope::~LockSafeScope()
 		return;
 	}
 	lock_->unlock();
-	//lock_->setThreadId(0);
+	//lock_->setThreadId(nullptr);
 }
 
 //------------------------------------------------------------------------//

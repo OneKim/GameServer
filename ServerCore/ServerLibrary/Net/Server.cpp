@@ -13,6 +13,9 @@ Server::Server(ContentsProcess *contentsProcess)
 		return;
 	}
 	this->initialize(&config);
+
+	// db 초기화
+	DBManager::getInstance();
 }
 
 Server::~Server()
@@ -34,7 +37,7 @@ void Server::initialize(xml_t *config)
 	TaskManager::getInstance();
 
 	//서버 설정
-	xmlNode_t *root = config->FirstChildElement("APP")->FirstChildElement("Server");
+	xmlNode_t *root = config->FirstChildElement("App")->FirstChildElement("Server");
 	if (!root) {
 		SLog(L"@ not exist server setting");
 		return;
@@ -52,13 +55,13 @@ void Server::initialize(xml_t *config)
 
 	SLog(L"* IO worker thread count : %d", workerThreadCount_);
 
-	root = config->FirstChildElement("APP");
+	root = config->FirstChildElement("App");
 	elem = root->FirstChildElement("Name");
 
 	SLog(L"### %s start!!! ###", elem->GetText());
 }
 
-SERVER_STATUS			& Server::status()
+SERVER_STATUS &Server::status()
 {
 	return status_;
 }

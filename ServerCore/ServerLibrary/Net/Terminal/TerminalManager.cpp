@@ -43,8 +43,12 @@ void TerminalManager::put(wstr_t serverName, Terminal *terminal)
 	terminalPool_.insert(make_pair(serverName, terminal));
 }
 
-Terminal* TerminalManager::terminal(wstr_t name)
+Terminal* TerminalManager::get(wstr_t name)
 {
+	auto itr = terminalPool_.find(name);
+	if (itr == terminalPool_.end()) {
+		return nullptr;
+	}
 	return terminalPool_.at(name);
 }
 

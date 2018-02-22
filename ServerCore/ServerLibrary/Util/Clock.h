@@ -28,7 +28,7 @@ typedef enum {
 	DAY_THURSDAY		= 4,
 	DAY_FRIDAY			= 5,
 	DAY_SATURDAY		= 6,
-}DayofTheWeek;
+}DayOfTheWeek;
 
 #define DATETIME_FORMAT			L"D%Y-%m-%dT%H:%M:%S"
 #define DATE_FORMAT				L"%Y-%m-%d"
@@ -59,5 +59,5 @@ public:
 	wstr_t	tomorrow();
 	wstr_t	yesterday();
 
-	DayofTheWeek todayOfTheWeek();
+	DayOfTheWeek todayOfTheWeek();
 };

@@ -17,10 +17,10 @@ LogFile::LogFile(xml_t *config)
 	xmlNode_t *root = config->FirstChildElement("App")->FirstChildElement("Log");
 	xmlNode_t *elem = root->FirstChildElement("Path");
 
-	array<WCHAR, _MAX_PATH> logfilePath;
-	StrConvA2W((char*)elem->GetText(), logfilePath.data(), logfilePath.max_size());
-	printf("* Log create : [%ws]file log mode\n", logfilePath.data());
-	this->initialize(logfilePath.data());
+	array<WCHAR, _MAX_PATH> logFilePath;
+	StrConvA2W((char*)elem->GetText(), logFilePath.data(), logFilePath.max_size());
+	printf("* Log create : [%ws]file log mode\n", logFilePath.data());
+	this->initialize(logFilePath.data());
 }
 
 LogFile::~LogFile()
@@ -39,10 +39,10 @@ LogFile::~LogFile()
 	_wrename(fileName_.c_str(), closeFileName.c_str());
 }
 
-void LogFile::initialize(WCHAR *logFielName)
+void LogFile::initialize(WCHAR *logFileName)
 {
-	fileName_ = logFielName;
-	fs_.open(logFielName, std::ios::out | std::ios::trunc);
+	fileName_ = logFileName;
+	fs_.open(logFileName, std::ios::out | std::ios::trunc);
 	if (fs_.bad()) {
 		printf("! logfile error, file open fail.\n");
 		assert(false);
@@ -155,7 +155,8 @@ void SystemLog::initialize(xml_t *config)
 	if (!root) {
 		printf("@ not exist log setting");
 		LogBase *base = new LogPrintf();
-		logWirte_.setLogger(base, L"testServer");
+		logWrite_.setLogger(base, L"testServer");
+		return;
 	}
 	xmlNode_t *elem = root->FirstChildElement("Path");
 
@@ -173,13 +174,13 @@ void SystemLog::initialize(xml_t *config)
 	else {
 		base = new LogPrintf();
 	}
-	logWirte_.setLogger(base, prefix.c_str());
+	logWrite_.setLogger(base, prefix.c_str());
 }
 
 void SystemLog::log(WCHAR *fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
-	logWirte_.log(fmt, args);
+	logWrite_.log(fmt, args);
 	va_end(args);
 }

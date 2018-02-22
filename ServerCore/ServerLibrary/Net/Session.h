@@ -32,10 +32,10 @@ public:
 	virtual	Package*	onRecv(size_t transferSize) = 0;
 	virtual	void		recvStandBy() {};
 	
-	virtual	void		onClose();
+	virtual	void		onClose(bool force = false);
 
 	SOCKET&				socket();
-	str_t				clientAddress();
+	wstr_t				clientAddress();
 
 	oid_t				id();
 	void				setId(oid_t id);

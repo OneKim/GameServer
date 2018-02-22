@@ -5,7 +5,7 @@
 #include "Type.h"
 
 #define SLog(arg, ...)				SystemLog::getInstance().log(arg, __VA_ARGS__);
-#define SErrLog(arg, ...)			SystemLog::getInstance().log(arg, __VA_ARGS__);
+#define SErrLog(arg, ...)			SystemLog::getInstance().log(arg, __VA_ARGS__); ::ExitProcess(0);
 
 //------------------------------------------------------------------------//
 class LogBase
@@ -36,7 +36,7 @@ public:
 	virtual ~LogFile();
 
 	void initialize() {}
-	void initialize(WCHAR *logFielName);
+	void initialize(WCHAR *logFileName);
 	void log(WCHAR *logStr);
 };
 //------------------------------------------------------------------------//
@@ -65,7 +65,7 @@ typedef	LogWriter* LogWriterPtr;
 class SystemLog : public Singleton<SystemLog>
 {
 private:
-	LogWriter	logWirte_;
+	LogWriter	logWrite_;
 public:
 	SystemLog();
 	virtual ~SystemLog();

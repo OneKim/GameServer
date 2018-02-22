@@ -1,12 +1,11 @@
 #pragma once
 #include "stdafx.h"
-#include <Ole2.h>
+#include <ole2.h>
 #include <comdef.h>
 #include <comutil.h>
 #include <conio.h>
 
-//#import "C:\Program Files\Common Files\System\ADO\msado15.dll"	rename("EOF", "EndOfFile")
-#include "C:\Program Files\Common Files\System\ADO\msado15.tlh"
+#import "C:\Program Files\Common Files\System\ADO\msado15.dll"	rename("EOF", "EndOfFile")
 #include "Database.h"
 
 typedef ADODB::_ConnectionPtr			dbConnectionPtr;

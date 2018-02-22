@@ -130,7 +130,7 @@ bool QueryRecord::get(char* fieldName, char* fieldValue)
 	try {
 		_variant_t vtValue;
 		vtValue = record_->Fields->GetItem(fieldName)->GetValue();
-		sprintf_s(fieldValue, DB_PRAM_SIZE, "%s", (LPCSTR)((_bstr_t)vtValue.bstrVal));
+		sprintf_s(fieldValue, DB_PARAM_SIZE, "%s", (LPCSTR)((_bstr_t)vtValue.bstrVal));
 		return true;
 	}
 	catch (_com_error &e) {
@@ -145,7 +145,7 @@ bool QueryRecord::get(char* fieldName, wchar_t* fieldValue)
 	try {
 		_variant_t vtValue;
 		vtValue = record_->Fields->GetItem(fieldName)->GetValue();
-		swprintf_s(fieldValue, DB_PRAM_SIZE, L"%s", (LPWSTR)((_bstr_t)vtValue.bstrVal));
+		swprintf_s(fieldValue, DB_PARAM_SIZE, L"%s", (LPWSTR)((_bstr_t)vtValue.bstrVal));
 		return true;
 	}
 	catch (_com_error &e) {
@@ -155,7 +155,7 @@ bool QueryRecord::get(char* fieldName, wchar_t* fieldValue)
 	return false;
 }
 
-bool QueryRecord::get(char* fieldName, int& fieldValue)
+bool QueryRecord::get(char* fieldName, int32_t& fieldValue)
 {
 	try {
 		_variant_t vtValue;
@@ -170,6 +170,20 @@ bool QueryRecord::get(char* fieldName, int& fieldValue)
 	return false;
 }
 
+bool QueryRecord::get(char* fieldName, int64_t& fieldValue)
+{
+	try {
+		_variant_t  vtValue;
+		vtValue = record_->Fields->GetItem(fieldName)->GetValue();
+		fieldValue = vtValue.intVal;
+		return true;
+	}
+	catch (_com_error &e) {
+		this->errorReport(e);
+		SLog(L"! error query field : %S", fieldName);
+	}
+	return false;
+}														   
 bool QueryRecord::get(char* fieldName, float& fieldValue)
 {
 	try {

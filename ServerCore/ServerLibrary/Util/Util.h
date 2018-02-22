@@ -13,7 +13,7 @@
 #define isInRange(minimum, x, maximum)		(x == fixInRange(minimum, x, maximum)) ? true : false
 
 //overflow üũ
-inline	bool isOverFlower_unit(unsigned int	original, unsigned int add)
+inline	bool isOverFlower_uint(unsigned int	original, unsigned int add)
 {
 	unsigned int before	= original;
 	unsigned int after = original + add;
@@ -47,11 +47,11 @@ inline void StrConvT2A(TCHAR *src, CHAR *dest, size_t destLen) {
 #endif // UNICODE
 }
 
-inline void StrConvA2W(CHAR *src, WCHAR *dest, size_t desLen) {
-	if (desLen < 1) {
+inline void StrConvA2W(CHAR *src, WCHAR *dest, size_t destLen) {
+	if (destLen < 1) {
 		return;
 	}
-	MultiByteToWideChar(CP_ACP, 0, src, -1, dest, (int)desLen - 1);
+	MultiByteToWideChar(CP_ACP, 0, src, -1, dest, (int)destLen - 1);
 }
 
 inline void StrConvW2A(WCHAR * src, CHAR *dest, size_t destLen) {

@@ -94,10 +94,10 @@ wstr_t Clock::yesterday()
 	return this->tickToStr(this->systemTick() - DAY_TO_TICK(1), DATE_FORMAT);
 }
 
-DayofTheWeek Clock::todayOfTheWeek()
+DayOfTheWeek Clock::todayOfTheWeek()
 {
 	tm time;
 	tick_t tick = this->systemTick();
 	localtime_s(&time, &tick);
-	return (DayofTheWeek)time.tm_wday;
+	return (DayOfTheWeek)time.tm_wday;
 }

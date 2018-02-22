@@ -24,11 +24,11 @@ public:
 		}
 
 		while (!record_.isEof()) {
-			array<WCHAR, DB_PRAM_SIZE> buffer;
+			array<WCHAR, DB_PARAM_SIZE> buffer;
 
 			if (record_.get("name", buffer.data())) {
 				SLog(L"id : %s", buffer.data());
-				array<CHAR, DB_PRAM_SIZE> nameBuf;
+				array<CHAR, DB_PARAM_SIZE> nameBuf;
 				StrConvW2A(buffer.data(), nameBuf.data(), nameBuf.size());
 				iPacket.name_ = nameBuf.data();
 				iPacket.result_ = TRUE;
@@ -36,7 +36,7 @@ public:
 			record_.moveNext();
 		}
 
-		Terminal *terminal = TerminalManager::getInstance().terminal(L"ChattingServer");
+		Terminal *terminal = TerminalManager::getInstance().get(L"ChattingServer");
 		terminal->sendPacket(&iPacket);
 	}
 };

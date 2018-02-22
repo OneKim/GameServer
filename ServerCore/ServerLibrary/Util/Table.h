@@ -19,7 +19,7 @@ typedef	std::function<void(void *, void *)>	PairFunction;
 
 #if 0	//하이라이트 때문에 /* */ 주석이 아닌 #if 0 ~ #endif로 처리
 template <typename KEY, typename VALUE>
-class HashTable
+class hash_map
 {
 	typedef std::hash_map<KEY, VALUE>			MAP;
 	typedef	typename MAP::iterator				ITER;

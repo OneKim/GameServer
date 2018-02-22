@@ -39,18 +39,17 @@ bool Session::setSocketOpt()
 		return false;
 	}
 #else
-	tcp_keepalive keepAliveSet = { 0 }, retuned = { 0 };
+	tcp_keepalive keepAliveSet = { 0 }, returned = { 0 };
 	keepAliveSet.onoff = 1;
 	keepAliveSet.keepalivetime = 3000;			// Keep Alive in 3 sec.
 	keepAliveSet.keepaliveinterval = 3000;		// Resend if No-Reply
 
 	DWORD dwBytes;
-	if (WSAIoctl(socketData_.socket_, SIO_KEEPALIVE_VALS, &keepAliveSet, sizeof(keepAliveSet),
-&retuned, sizeof(retuned), &dwBytes, NULL, NULL) != 0) {
+	if (WSAIoctl(socketData_.socket_, SIO_KEEPALIVE_VALS, &keepAliveSet, sizeof(keepAliveSet), &returned, sizeof(returned), &dwBytes, NULL, NULL) != 0) {
 		return false;
 	}
 #endif
-	return false;
+	return true;
 }
 
 bool Session::onAccept(SOCKET socket, SOCKADDR_IN addrInfo)
@@ -66,9 +65,14 @@ bool Session::onAccept(SOCKET socket, SOCKADDR_IN addrInfo)
 	return true;
 }
 
-void Session::onClose()
+void Session::onClose(bool force)
 {
-	SessionManager::getInstance().closeSession(this);
+	if (force) {
+		SessionManager::getInstance().forceCloseSession(this);
+	}
+	else {
+		SessionManager::getInstance().closeSession(this);
+	}
 }
 
 SOCKET& Session::socket()
@@ -76,11 +80,16 @@ SOCKET& Session::socket()
 	return socketData_.socket_;
 }
 
-str_t Session::clientAddress()
+wstr_t Session::clientAddress()
 {
 	array<char, SIZE_64> ip;
 	inet_ntop(AF_INET, &(socketData_.addrInfo_.sin_addr), ip.data(), ip.size());
-	return ip.data();
+
+	array<WCHAR, SIZE_64> wip;
+	StrConvA2W(ip.data(), wip.data(), wip.max_size());
+	wstr_t stringData = wip.data();
+
+	return stringData;
 }
 
 oid_t Session::id()

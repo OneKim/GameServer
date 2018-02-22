@@ -22,7 +22,7 @@
     <Type>WithFile</Type>
   </Log>
   <DataBase>
-    <ServerName>192.168.0.150</ServerName>
+    <ServerName>192.168.56.150</ServerName>
     <DB>GameDB</DB>
     <Login>gameServer</Login>
     <Password>testServer</Password>

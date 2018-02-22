@@ -124,6 +124,11 @@ void TaskManager::initialize(xml_t *config)
 
 void TaskManager::add(Work *workObject, int freqSec, int durationSec)
 {
+	const int MINIMAL_THREAD_COUNT = 1;
+	if (threadCount_ < MINIMAL_THREAD_COUNT) {
+		return;
+	}
+
 	static int nodeCount = 0;
 
 	TaskNode *node = new TaskNode(workObject, freqSec, durationSec);

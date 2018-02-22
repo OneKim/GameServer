@@ -29,8 +29,7 @@ _realloc_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
 _expand_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
 #define		free(p)
 _free_dbg(p, _NORMAL_BLOCK)
-#define		_msize(p)
-_msize_dbg(p, _NORMAL_BLOCK)
+#define		_msize(p)		_msize_dbg(p, _NORMAL_BLOCK)
 
 #endif // _CRTDBG_MAP_ALLOC
 #endif

@@ -26,7 +26,7 @@ void LoginProcess::C_REQ_ID_PW(Session *session, Packet *rowPacket)
 	dbPacket.id_ = packet->id_;
 	dbPacket.password_ = packet->password_;
 
-	Terminal *terminal = TerminalManager::getInstance().terminal(L"DBAgent");
+	Terminal *terminal = TerminalManager::getInstance().get(L"DBAgent");
 	terminal->sendPacket(&dbPacket);
 }
 
@@ -50,7 +50,7 @@ void LoginProcess::I_DB_ANS_ID_PW(Session *session, Packet *rowPacket)
 	PK_I_CHTTING_NOTIFY_ID iPacket;
 	iPacket.oidAccountId_ = packet->oidAccountId_;
 	iPacket.clientId_ = packet->clientId_;
-	Terminal *terminal = TerminalManager::getInstance().terminal(L"ChattingServer");
+	Terminal *terminal = TerminalManager::getInstance().get(L"ChattingServer");
 	if (terminal == nullptr) {
 		SLog(L"! Chatting Server terminal is not connected");
 	}
@@ -69,7 +69,7 @@ void LoginProcess::I_LOGIN_NOTIFY_ID_LOADED(Session *session, Packet *rowPacket)
 	if (clientSession == nullptr) {
 		return;
 	}
-	Terminal *terminal = TerminalManager::getInstance().terminal(L"ChattingServer");
+	Terminal *terminal = TerminalManager::getInstance().get(L"ChattingServer");
 	if (terminal == nullptr) {
 		SLog(L"! Chatting Server terminal is not connected");
 	}
@@ -78,6 +78,6 @@ void LoginProcess::I_LOGIN_NOTIFY_ID_LOADED(Session *session, Packet *rowPacket)
 	ansPacket.port_ = terminal->port();
 	ansPacket.name_ = packet->name_;
 
-	SLog(L"* loaded [%S] user name, form [%S]", ansPacket.name_.c_str(), session->clientAddress().c_str());
+	SLog(L"* loaded [%S] user name, from [%s]", ansPacket.name_.c_str(), session->clientAddress().c_str());
 	clientSession->sendPacket(&ansPacket);
 }

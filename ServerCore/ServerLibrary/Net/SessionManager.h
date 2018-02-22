@@ -12,7 +12,7 @@ class SessionManager : public Singleton<SessionManager>
 	int								maxConnection_;
 	Lock							lock_;
 
-	oid_t							idSeed_;
+	oid_t							sessionSeed_;
 
 	typedef std::function<void (SessionList *sessionList, wstr_t *arg)> cmdFunc;
 	unordered_map<wstr_t, cmdFunc>	serverCommand_;

@@ -24,7 +24,7 @@ public:
 				&HeapFragVlaue,
 				sizeof(HeapFragVlaue));
 		}
-		printf("* Low-fragmentation Heap setting\n");
+		printf("* Low-fragmentation Heap setting\n");		
 	}
 };
 

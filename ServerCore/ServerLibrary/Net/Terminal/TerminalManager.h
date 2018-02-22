@@ -13,7 +13,7 @@ public:
 	void		initialize(xml_t *config);
 
 	void		put(wstr_t serverName, Terminal *terminal);
-	Terminal*	terminal(wstr_t name);
+	Terminal*	get(wstr_t name);
 
 	bool		isTerminal(const char *ip);
 	void		run(Server *server);

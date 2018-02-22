@@ -55,7 +55,7 @@ public:
 		return (size_t) pmc.WorkingSetSize;
 	}
 
-	SIZE_T	phsyicMemUsage()
+	SIZE_T	physicMemUsage()
 	{
 		MEMORYSTATUSEX memInfo;
 		memInfo.dwLength = sizeof(MEMORYSTATUSEX);

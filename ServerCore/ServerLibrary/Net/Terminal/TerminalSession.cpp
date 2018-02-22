@@ -23,7 +23,7 @@ bool TerminalSession::connectTo(char *ip, int port)
 	return true;
 }
 
-void TerminalSession::onSend(size_t trnasferSize)
+void TerminalSession::onSend(size_t transferSize)
 {
 	//Nothing
 }
@@ -35,14 +35,16 @@ void TerminalSession::sendPacket(Packet *packet)
 
 	packet_size_t offset = 0;
 	array<char, SOCKET_BUF_SIZE> buffer;
-	packet_size_t packetLen[1] = { (packet_size_t)sizeof(packet_size_t) + (packet_size_t)stream.size(), };
-
+	const size_t packetHeaderSize = sizeof(packet_size_t);
+	
+	
+	packet_size_t packetLen[1] = { (packet_size_t)packetHeaderSize + (packet_size_t)stream.size(), };																																	  
 	// insert packet len
-	memcpy_s(buffer.data() + offset, buffer.max_size(), (void *)packetLen, sizeof(packetLen));
+	memcpy_s(buffer.data() + offset, buffer.max_size(), (void *)packetLen, packetHeaderSize);
 	offset += sizeof(packetLen);
 
 	// packet obfuscation
-	PacketObfuscation::getInstance().encodingHeader((Byte*)buffer.data(), sizeof(packetLen));
+	PacketObfuscation::getInstance().encodingHeader((Byte*)buffer.data(), packetHeaderSize);
 	PacketObfuscation::getInstance().encodingData((Byte*)stream.data(), stream.size());
 
 	// insert packet data
@@ -54,8 +56,8 @@ void TerminalSession::sendPacket(Packet *packet)
 
 Package* TerminalSession::onRecv(size_t transferSize)
 {
-	array<char, SOCKET_BUF_SIZE> rowData;
-	int ret = ::recv(socketData_.socket_, rowData.data(), (int)rowData.size(), 0);
+	array<Byte, SOCKET_BUF_SIZE> rowData;
+	int ret = ::recv(socketData_.socket_, (char *)rowData.data(), (int)rowData.size(), 0);
 	if (ret <= 0) {
 		return nullptr;
 	}
@@ -65,11 +67,16 @@ Package* TerminalSession::onRecv(size_t transferSize)
 
 	memcpy_s((void *)packetLen, sizeof(packetLen), (void *)rowData.data(), sizeof(packetLen));
 	PacketObfuscation::getInstance().decodingHeader((Byte*)packetLen, sizeof(packetLen));
+	while (ret < (int)packetLen[0]) {
+		int len = ret;
+		ret += ::recv(socketData_.socket_, (char *)rowData.data() + len, (int)rowData.size() - len, 0);
+	}
+
 	offset += sizeof(packetLen);
-	PacketObfuscation::getInstance().decodingData((Byte*)rowData.data(), packetLen[0]);
+	PacketObfuscation::getInstance().decodingData((Byte*)rowData.data() + offset, packetLen[0] - offset);
 
 	//서버 간 패킷 처리
-	Packet *packet = PacketAnalyzer::getInstance().analyzer(rowData.data() + offset, packetLen[0]);
+	Packet *packet = PacketAnalyzer::getInstance().analyzer((char *)rowData.data() + offset, packetLen[0]);
 	if (packet == nullptr) {
 		return nullptr;
 	}

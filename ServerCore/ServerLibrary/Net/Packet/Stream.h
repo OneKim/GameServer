@@ -35,8 +35,8 @@ public:
 	void operator << (const UINT64 &value);
 	
 	void operator << (const std::vector<wstr_t> &value);
-	void operator << (const str_t &value);
-	void operator << (const wstr_t &value);
+	void operator << (const str_t value);
+	void operator << (const wstr_t value);
 
 	// read
 	//------------------------------------------------------------------------//

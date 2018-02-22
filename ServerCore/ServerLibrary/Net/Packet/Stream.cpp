@@ -52,7 +52,7 @@ bool Stream::checkWriteBound(size_t len)
 	return true;
 }
 
-#define STREAM_WRITE(vlaue)						\
+#define STREAM_WRITE(value)						\
 	INT32 size = sizeof(value);					\
 	if (this->checkWriteBound(size) == false) {	\
 		return;									\
@@ -120,15 +120,15 @@ void Stream::operator << (const std::vector<wstr_t> &value)
 }
 
 
-void Stream::operator << (const str_t &value)
+void Stream::operator << (const str_t value)
 {
-	*this << (Int32)(value.length());
+	*this << (Int32)value.length();
 	for (auto i : value) {
 		*this << i;
 	}
 }
 
-void Stream::operator << (const wstr_t &value)
+void Stream::operator << (const wstr_t value)
 {
 	*this << (Int32)(value.length());
 	for (auto i : value) {
@@ -142,7 +142,7 @@ bool Stream::checkReadBound(size_t len)
 {
 	if (readPt_ + len > offset_) {
 		SLog(L"! readOffset : %d, size: %d, totalOffset = %d", readPt_, len, offset_);
-		SLog(L"! socket stream has noet more memory.");
+		SLog(L"! socket stream has not more memory.");
 		ASSERT(FALSE);
 		return false;
 	}

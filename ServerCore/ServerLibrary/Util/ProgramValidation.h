@@ -12,7 +12,9 @@ class ProgramValidation
 		SOCKET smtpSocket;
 		if (!connectSMTP(&smtpSocket)) {
 			SLog(L"! The smtp server is not loaded.");
+#ifndef _DEBUG
 			exit(1);
+#endif // !_DEBUG			
 		}
 	}
 
@@ -29,7 +31,9 @@ class ProgramValidation
 					"serverProgramer@server.com",
 					"[EXPIRE] 서버 유효성 체크 실패",
 					"IP주소, port 번호등...");
+#ifndef _DEBUG
 				exit(1);
+#endif // !_DEBUG				
 			}
 		}
 
