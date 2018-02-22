@@ -11,7 +11,7 @@ namespace DummyClient
         //--- encoding 부분
         public static void encodeHeader(MemoryStream packet, Int64 headerType)
         {
-            PacketUtil.encodeHeader(packet, headerType);
+            PacketUtil.encode(packet, headerType);
         }
 
         public static void encode(MemoryStream packet, Byte value)

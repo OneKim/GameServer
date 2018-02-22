@@ -29,7 +29,7 @@ namespace DummyClient
             chatWnd_ = null;
         }
 
-        private void textbox_input__KeyDown(object sender, KeyEventArgs e)
+        private void textbox_input_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) {
                 String inputStr = textbox_input_.Text + Environment.NewLine;

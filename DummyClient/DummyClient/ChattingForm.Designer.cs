@@ -50,7 +50,7 @@
             this.textbox_input_.Name = "textbox_input_";
             this.textbox_input_.Size = new System.Drawing.Size(455, 21);
             this.textbox_input_.TabIndex = 1;
-            this.textbox_input_.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbox_input__KeyDown);
+            this.textbox_input_.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbox_input_KeyDown);
             // 
             // ChattingForm
             // 

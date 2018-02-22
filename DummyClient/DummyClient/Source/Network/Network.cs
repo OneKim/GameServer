@@ -19,7 +19,7 @@ namespace DummyClient
         private NetworkStream stream_;
 
         private Thread readWorker_;
-        private Thread hearBeatWorker_;
+        private Thread heartBeatWorker_;
 
         private TcpClient client_;
         private NET_STATE state_ = NET_STATE.START;
@@ -43,9 +43,9 @@ namespace DummyClient
             state_ = NET_STATE.DISCONNECTED;
             stream_.Close();
             stream_.Flush();
-            stream_.Close();
+            client_.Close();
             readWorker_.Abort();
-            hearBeatWorker_.Abort();
+            heartBeatWorker_.Abort();
             packetProcee_ = null;
         }
 
@@ -66,8 +66,8 @@ namespace DummyClient
             readWorker_ = new Thread(new ThreadStart(receive));
             readWorker_.Start();
 
-            hearBeatWorker_ = new Thread(new ThreadStart(hearBeat));
-            hearBeatWorker_.Start();
+            heartBeatWorker_ = new Thread(new ThreadStart(heartBeat));
+            heartBeatWorker_.Start();
             return true;
         }
 
@@ -88,7 +88,7 @@ namespace DummyClient
             return state_ == NET_STATE.CONNECTED ? true : false;
         }
 
-        private void receive()
+        public void receive()
         {
             try {
                 while (this.isConnected()) {
@@ -159,11 +159,11 @@ namespace DummyClient
             }
         }
 
-        private void hearBeat()
+        private void heartBeat()
         {
             while (this.isConnected()) {
-                PK_C_NOTIFY_HEARTBEAT hearBeatPacket = new PK_C_NOTIFY_HEARTBEAT();
-                this.sendPacket(hearBeatPacket);
+                PK_C_NOTIFY_HEARTBEAT heartBeatPacket = new PK_C_NOTIFY_HEARTBEAT();
+                this.sendPacket(heartBeatPacket);
                 Thread.Sleep(1000);
             }
         }
