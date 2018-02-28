@@ -13,7 +13,7 @@ ADODatabase::ADODatabase()
 		SErrLog(L"! Database init fail");
 	}
 	const int TIME_OUT = 30;
-	this->setConnectTimeOut(TIME_OUT);
+	HRESULT hr = this->setConnectTimeOut(TIME_OUT);
 }
 
 ADODatabase::~ADODatabase()
@@ -31,6 +31,7 @@ HRESULT ADODatabase::setConnectTimeOut(long second)
 	if (!dbConnection_) {
 		return S_FALSE;
 	}
+
 	return dbConnection_->put_ConnectionTimeout(second);
 }
 

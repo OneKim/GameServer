@@ -21,6 +21,8 @@ namespace DummyClient
 
             mainForm_ = new DummyClient();
             programState_ = new ProgramState();
+
+
             Application.Run(mainForm_);
             Application.Exit();
         }
