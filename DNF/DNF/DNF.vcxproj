@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Choisungin\Desktop\DNF\DNF\Packet;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath);$(ProjectDir)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath);$(ProjectDir)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -161,6 +161,8 @@
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Export_Function.h" />
     <ClInclude Include="Export_Resources.h" />
+    <ClInclude Include="Export_Server.h" />
+    <ClInclude Include="Export_Server.inl" />
     <ClInclude Include="Export_System.h" />
     <ClInclude Include="Export_Utility.h" />
     <ClInclude Include="Font.h" />
@@ -179,11 +181,6 @@
     <ClInclude Include="Macro.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="NobleSky.h" />
-    <ClInclude Include="Packet\PacketClass.h" />
-    <ClInclude Include="Packet\PacketFactory.h" />
-    <ClInclude Include="Packet\PacketHeader.h" />
-    <ClInclude Include="Packet\PacketObfuscation.h" />
-    <ClInclude Include="Packet\Stream.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RcTex.h" />
     <ClInclude Include="Renderer.h" />
@@ -199,6 +196,12 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSelector.h" />
     <ClInclude Include="SeriaRoom.h" />
+    <ClInclude Include="Server\PacketClass.h" />
+    <ClInclude Include="Server\PacketFactory.h" />
+    <ClInclude Include="Server\PacketHeader.h" />
+    <ClInclude Include="Server\PacketObfuscation.h" />
+    <ClInclude Include="Server\Stream.h" />
+    <ClInclude Include="Server\WinSocket.h" />
     <ClInclude Include="SR_background.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
@@ -209,7 +212,6 @@
     <ClInclude Include="Typedef.h" />
     <ClInclude Include="VIBuffer.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="WinSocket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp" />
@@ -227,8 +229,6 @@
     <ClCompile Include="LogoScene.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="NobleSky.cpp" />
-    <ClCompile Include="Packet\PacketObfuscation.cpp" />
-    <ClCompile Include="Packet\Stream.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RcTex.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -242,6 +242,8 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SeriaRoom.cpp" />
+    <ClCompile Include="Server\PacketObfuscation.cpp" />
+    <ClCompile Include="Server\Stream.cpp" />
     <ClCompile Include="SR_background.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

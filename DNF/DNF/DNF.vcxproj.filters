@@ -133,6 +133,9 @@
     <Filter Include="97.Engine\03.Server\01.Packet">
       <UniqueIdentifier>{56fcf788-3d9c-452f-98f3-6a75ef6b62bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97.Engine\03.Server\99.Export">
+      <UniqueIdentifier>{3a3b0f60-6dd1-4e82-a3ad-aab50493992d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -273,23 +276,29 @@
     <ClInclude Include="Player.h">
       <Filter>02.Instance\01.Stage\00.Player</Filter>
     </ClInclude>
-    <ClInclude Include="WinSocket.h">
+    <ClInclude Include="Export_Server.h">
+      <Filter>97.Engine\03.Server\99.Export</Filter>
+    </ClInclude>
+    <ClInclude Include="Export_Server.inl">
+      <Filter>97.Engine\03.Server\99.Export</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\PacketClass.h">
+      <Filter>97.Engine\03.Server\01.Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\PacketFactory.h">
+      <Filter>97.Engine\03.Server\01.Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\PacketHeader.h">
+      <Filter>97.Engine\03.Server\01.Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\PacketObfuscation.h">
+      <Filter>97.Engine\03.Server\01.Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\Stream.h">
+      <Filter>97.Engine\03.Server\01.Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\WinSocket.h">
       <Filter>97.Engine\03.Server\00.WinSocket</Filter>
-    </ClInclude>
-    <ClInclude Include="Packet\PacketClass.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="Packet\PacketFactory.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="Packet\PacketHeader.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="Packet\Stream.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="Packet\PacketObfuscation.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,10 +398,10 @@
     <ClCompile Include="Player.cpp">
       <Filter>02.Instance\01.Stage\00.Player</Filter>
     </ClCompile>
-    <ClCompile Include="Packet\Stream.cpp">
+    <ClCompile Include="Server\PacketObfuscation.cpp">
       <Filter>97.Engine\03.Server\01.Packet</Filter>
     </ClCompile>
-    <ClCompile Include="Packet\PacketObfuscation.cpp">
+    <ClCompile Include="Server\Stream.cpp">
       <Filter>97.Engine\03.Server\01.Packet</Filter>
     </ClCompile>
   </ItemGroup>
