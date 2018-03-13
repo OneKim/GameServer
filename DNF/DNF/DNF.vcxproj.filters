@@ -127,14 +127,17 @@
     <Filter Include="97.Engine\03.Server">
       <UniqueIdentifier>{9ed7f15b-5c85-4b38-9b9f-e48772420f62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.Engine\03.Server\00.WinSocket">
-      <UniqueIdentifier>{46c14170-5387-4afe-a90d-e710ad8f53fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97.Engine\03.Server\01.Packet">
-      <UniqueIdentifier>{56fcf788-3d9c-452f-98f3-6a75ef6b62bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="97.Engine\03.Server\99.Export">
       <UniqueIdentifier>{3a3b0f60-6dd1-4e82-a3ad-aab50493992d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Engine\03.Server\00.Packet">
+      <UniqueIdentifier>{56fcf788-3d9c-452f-98f3-6a75ef6b62bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Engine\03.Server\01.ServerManager">
+      <UniqueIdentifier>{a7a6de3a-ff99-410f-91b7-05cd1960ffaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Engine\00.System\05.Memory">
+      <UniqueIdentifier>{f011f06a-5a5b-4d19-85bf-251e2c2b177e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -283,22 +286,25 @@
       <Filter>97.Engine\03.Server\99.Export</Filter>
     </ClInclude>
     <ClInclude Include="Server\PacketClass.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClInclude>
     <ClInclude Include="Server\PacketFactory.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClInclude>
     <ClInclude Include="Server\PacketHeader.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClInclude>
     <ClInclude Include="Server\PacketObfuscation.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClInclude>
     <ClInclude Include="Server\Stream.h">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Server\WinSocket.h">
-      <Filter>97.Engine\03.Server\00.WinSocket</Filter>
+    <ClInclude Include="Server\ServerManager.h">
+      <Filter>97.Engine\03.Server\01.ServerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\PacketAnalyzer.h">
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -399,10 +405,16 @@
       <Filter>02.Instance\01.Stage\00.Player</Filter>
     </ClCompile>
     <ClCompile Include="Server\PacketObfuscation.cpp">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClCompile>
     <ClCompile Include="Server\Stream.cpp">
-      <Filter>97.Engine\03.Server\01.Packet</Filter>
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Server\ServerManager.cpp">
+      <Filter>97.Engine\03.Server\01.ServerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Server\PacketAnalyzer.cpp">
+      <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

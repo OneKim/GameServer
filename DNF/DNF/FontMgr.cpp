@@ -13,7 +13,7 @@ HRESULT CFontMgr::Add_Font(const TCHAR * pFontKey, const _uint & iHeight, const 
 	CFont*	pFont = CFont::Create(iHeight, iWidth, iWeight, pFontKey);
 	NULL_CHECK_RETURN(pFont, E_FAIL);
 
-	m_mapFont.insert(pair<const TCHAR*, auto_ptr<CFont>>(pFontKey, auto_ptr<CFont>(pFont)));
+	m_mapFont.insert(pair<const TCHAR*, CFont*>(pFontKey, pFont));
 
 	return S_OK;
 }
@@ -25,5 +25,8 @@ void CFontMgr::Render_Font(const TCHAR * pFontKey, const _vec3 & vPos, const TCH
 
 CFontMgr::~CFontMgr(void)
 {
+	for (auto font : m_mapFont)
+		Safe_Delete(font.second);
+
 	m_mapFont.clear();
 }

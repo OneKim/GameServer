@@ -11,6 +11,8 @@ public:
 
 	virtual void decodingHeader(Byte *packet, size_t packetLen) = 0;
 	virtual void decodingData(Byte *packet, size_t packetLen) = 0;
+
+	virtual ~Obfuscation() { }
 };
 
 //------------------------------------------------------------------------//
@@ -20,6 +22,7 @@ class XorObfuscation : public Obfuscation
 	int			keyLength_;
 public:
 	XorObfuscation();
+	virtual ~XorObfuscation() { }
 private:
 	void CalcXor(Byte *packet, int packetOffset, size_t packetLen);
 

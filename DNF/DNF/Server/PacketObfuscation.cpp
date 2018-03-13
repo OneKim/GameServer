@@ -6,7 +6,7 @@ XorObfuscation::XorObfuscation()
 {
 	//암호 선택에 대해서는 조금 고민해 볼것.
 	key_ = PACKET_MAKE_DATE;
-	keyLength_ = (int)key_.length();
+	keyLength_ = (int)key_.length();	
 }
 
 void XorObfuscation::CalcXor(Byte *packet, int packetOffset, size_t packetLen)
@@ -49,8 +49,8 @@ PacketObfuscation::PacketObfuscation()
 }
 
 PacketObfuscation::~PacketObfuscation()
-{
-	Safe_Delete(obfuscation_);
+{	
+	Safe_Delete(obfuscation_);	
 }
 
 void PacketObfuscation::encodingHeader(Byte *packet, size_t packetLen)

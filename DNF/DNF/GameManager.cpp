@@ -13,7 +13,7 @@ CGameManager::CGameManager(void)
 
 HRESULT CGameManager::Initialize_GameManager(void)
 {
-	m_pRenderer = auto_ptr<CRenderer>(CRenderer::Create());
+	m_pRenderer = shared_ptr<CRenderer>(CRenderer::Create());
 	NULL_CHECK_RETURN(m_pRenderer.get(), E_FAIL);
 
 	return S_OK;

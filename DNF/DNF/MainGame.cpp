@@ -15,27 +15,29 @@ CMainGame::CMainGame(void)
 
 HRESULT CMainGame::Initialize_MainGame(void)
 {
-	FAILED_CHECK_MSG(Engine::Initialize_GraphicDev(CGraphicDev::WINMODE::MODE_WIN), L"Initialize_GraphicDev Failed");	
+	FAILED_CHECK_MSG(Engine::Initialize_GraphicDev(CGraphicDev::WINMODE::MODE_WIN), L"Initialize_GraphicDev Failed!");	
 	m_pGraphicDev = Engine::Get_GraphicDev();
 	D3DXMatrixOrthoLH(&g_matOrtho, (_float)WINSIZEX, (_float)WINSIZEY, 0.0f, 1.f);
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &g_matOrtho);
 
-	FAILED_CHECK_MSG(Engine::Initialize_InputDevice(), L"Initialize_InputDevice Failed");
+	FAILED_CHECK_MSG(Engine::Initialize_InputDevice(), L"Initialize_InputDevice Failed!");
 
-	FAILED_CHECK(Engine::Add_Font(L"πŸ≈¡", 20, 14, FW_HEAVY));
-	FAILED_CHECK(Engine::Add_Font(L"HY≈¬πÈB", 20, 14, FW_HEAVY));
-	FAILED_CHECK(Engine::Add_Font(L"∏º¿∫ ∞ÌµÒ", 14, 9, FW_BOLD));
+	FAILED_CHECK_MSG(Engine::Add_Font(L"πŸ≈¡", 20, 14, FW_HEAVY), L"Add_Font Failed!");
+	FAILED_CHECK_MSG(Engine::Add_Font(L"HY≈¬πÈB", 20, 14, FW_HEAVY), L"Add_Font Failed!");
+	FAILED_CHECK_MSG(Engine::Add_Font(L"∏º¿∫ ∞ÌµÒ", 14, 9, FW_BOLD), L"Add_Font Failed!");
 
-	FAILED_CHECK(Engine::Initialize_Timers(L"TimeDelta:Immediate"));
-	FAILED_CHECK(Engine::Initialize_Timers(L"TimeDelta:60"));
+	FAILED_CHECK_MSG(Engine::Initialize_Timers(L"TimeDelta:Immediate"), L"Initialize_Timers Failed!");
+	FAILED_CHECK_MSG(Engine::Initialize_Timers(L"TimeDelta:60"), L"Initialize_Timers Failed!");
 
-	FAILED_CHECK(Engine::Initialize_Frames(L"Frame:60", 60.f));
+	FAILED_CHECK_MSG(Engine::Initialize_Frames(L"Frame:60", 60.f), L"Initialize_Frames Failed!");
 
-	FAILED_CHECK(Engine::Initialize_GameManager());
+	FAILED_CHECK_MSG(Engine::Initialize_GameManager(), L"Initialize_GameManager Failed!");
 
-	FAILED_CHECK(Initialize_Resource());
+	//FAILED_CHECK_MSG(Engine::Initialize_ServerManager(), L"Initialize_ServerManager Failed!");
 
-	FAILED_CHECK(Engine::Change_Scene(CSceneSelector(SCENE_SR, CLoading::LOADING_SR)));
+	FAILED_CHECK_MSG(Initialize_Resource(), L"Initialize_Resource Failed!");
+
+	FAILED_CHECK_MSG(Engine::Change_Scene(CSceneSelector(SCENE_SR, CLoading::LOADING_SR)), L"Change_Scene Failed!");
 
 	return S_OK;
 }
@@ -105,5 +107,6 @@ CMainGame::~CMainGame(void)
 {
 	Engine::Release_Utility();
 	Engine::Release_Resources();
+	Engine::Release_Server();
 	Engine::Release_System();
 }

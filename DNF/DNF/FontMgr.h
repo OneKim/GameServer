@@ -6,7 +6,7 @@ class CFontMgr
 public:
 	DECLARE_SINGLETON(CFontMgr)
 private:
-	map<const TCHAR*, auto_ptr<CFont>>			m_mapFont;
+	map<const TCHAR*, CFont*>			m_mapFont;
 private:
 	explicit	CFontMgr(void);
 public:

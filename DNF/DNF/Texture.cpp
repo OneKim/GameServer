@@ -58,7 +58,7 @@ HRESULT CTexture::Load_Texture(const TCHAR * pFilePath, const _ushort & wCnt)
 		m_vecTexture.push_back(pTexture);
 	}
 
-	m_dwContainerSize = m_vecTexture.size();
+	m_dwContainerSize = (_ulong)m_vecTexture.size();
 
 	return S_OK;
 }

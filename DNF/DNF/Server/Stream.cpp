@@ -45,8 +45,8 @@ void Stream::set(UCHAR *data, size_t size)
 bool Stream::checkWriteBound(size_t len)
 {
 	if (offset_ + len > sizeof(stream_)) {
-		MSG_BOX(L"! socket stream over.");
-		ASSERT(FALSE);
+	//	MSG_BOX(L"! socket stream over.");
+		//ASSERT(FALSE);
 		return false;
 	}
 	return true;
@@ -141,8 +141,8 @@ void Stream::operator << (const wstr_t value)
 bool Stream::checkReadBound(size_t len)
 {
 	if (readPt_ + len > offset_) {		
-		MSG_BOX(L"! socket stream has not more memory.");
-		ASSERT(FALSE);
+		//MSG_BOX(L"! socket stream has not more memory.");
+		//ASSERT(FALSE);
 		return false;
 	}
 	return true;

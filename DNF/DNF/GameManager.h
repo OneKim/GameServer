@@ -14,7 +14,7 @@ private:
 	typedef list<CGameObject*>	OBJECTLIST;
 private:
 	CScene*					m_pScene;
-	auto_ptr<CRenderer>		m_pRenderer;
+	shared_ptr<CRenderer>		m_pRenderer;
 private:
 	explicit	CGameManager(void);
 public:
