@@ -51,7 +51,7 @@ namespace DummyClient
 
         public bool connect(string ip, uint port)
         {
-            client_ = new TcpClient();
+            client_ = new TcpClient();            
             try {
                 client_.Connect(ip, Convert.ToInt32(port));
             }
