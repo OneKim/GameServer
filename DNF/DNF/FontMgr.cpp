@@ -20,7 +20,12 @@ HRESULT CFontMgr::Add_Font(const TCHAR * pFontKey, const _uint & iHeight, const 
 
 void CFontMgr::Render_Font(const TCHAR * pFontKey, const _vec3 & vPos, const TCHAR * pString, _color Color)
 {
-	m_mapFont[pFontKey]->Render_Font(pString, Color, vPos);
+	map<const TCHAR*, CFont*>::iterator	iter = find_if(m_mapFont.begin(), m_mapFont.end(), CTagFinder(pFontKey));
+
+	if (iter == m_mapFont.end())
+		return;
+
+	iter->second->Render_Font(pString, Color, vPos);
 }
 
 CFontMgr::~CFontMgr(void)

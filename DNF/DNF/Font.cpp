@@ -22,7 +22,7 @@ HRESULT CFont::Initialize_Font(const _uint & iHeight, const _uint & iWidth, cons
 
 void CFont::Render_Font(const TCHAR * pString, _color Color, const _vec3 & vPos)
 {
-	RECT	rc = {	  static_cast<_long>(vPos.x), static_cast<_long>(vPos.y)
+	RECT	rc = { static_cast<_long>(vPos.x), static_cast<_long>(vPos.y)
 					, static_cast<_long>(vPos.x + m_iWidth * lstrlen(pString)), static_cast<_long>(vPos.y + m_iHeight) };
 
 	m_pFont->DrawTextW(NULL, pString, lstrlen(pString), &rc, DT_NOCLIP, Color);

@@ -114,8 +114,8 @@ HRESULT ServerManager::Initialize_ServerManager(void)
 
 	//Thread »ý¼º
 	m_ReceiveThread = (HANDLE)_beginthreadex(NULL, 0, Receive_Thread, (void*)this, 0, NULL);
-	/*for (int i = 0; i < MAX_IOCP_THREAD; ++i)
-		m_WorkerThread[i] = (HANDLE)_beginthreadex(NULL, 0, Worker_Thread, (void*)this, 0, NULL);*/
+	for (int i = 0; i < MAX_IOCP_THREAD; ++i)
+		m_WorkerThread[i] = (HANDLE)_beginthreadex(NULL, 0, Worker_Thread, (void*)this, 0, NULL);
 
 	shared_ptr<PK_C_REQ_ID_PW> packet = shared_ptr<PK_C_REQ_ID_PW>((PK_C_REQ_ID_PW*)packetFactory.getPacket(E_C_REQ_ID_PW));
 	packet->id_ = m_ID;
