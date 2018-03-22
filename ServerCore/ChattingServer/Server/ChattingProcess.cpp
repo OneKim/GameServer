@@ -100,7 +100,8 @@ void ChattingProcess::C_REQ_EXIT(Session *session, Packet *rowPacket)
 	UserManager::getInstance().remove(session->id());
 
 	PK_S_ANS_EXIT ansPacket;
-	SLog(L"* recv exit packet by [%s]", session->clientAddress().c_str());
+	SLog(L"* recv exit packet by [%s]", session->clientAddress().c_str());	
 	session->sendPacket(&ansPacket);
+	session->onClose();
 }
 

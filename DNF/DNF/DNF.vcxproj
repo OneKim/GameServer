@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath);$(ProjectDir)</IncludePath>
+    <IncludePath>$(WindowsSDK_IncludePath);C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath);$(ProjectDir)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -92,7 +92,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../ThirdParty/Headers;</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -202,6 +202,8 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSelector.h" />
     <ClInclude Include="SeriaRoom.h" />
+    <ClInclude Include="Server\ChattingManager.h" />
+    <ClInclude Include="Server\ContentsProcess.h" />
     <ClInclude Include="Server\PacketAnalyzer.h" />
     <ClInclude Include="Server\PacketClass.h" />
     <ClInclude Include="Server\PacketFactory.h" />
@@ -209,6 +211,7 @@
     <ClInclude Include="Server\PacketObfuscation.h" />
     <ClInclude Include="Server\ServerManager.h" />
     <ClInclude Include="Server\Stream.h" />
+    <ClInclude Include="Server\ThreadJobQueue.h" />
     <ClInclude Include="SR_background.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
@@ -217,6 +220,15 @@
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Typedef.h" />
+    <ClInclude Include="UI\DXUT.h" />
+    <ClInclude Include="UI\DXUTcamera.h" />
+    <ClInclude Include="UI\DXUTenum.h" />
+    <ClInclude Include="UI\DXUTgui.h" />
+    <ClInclude Include="UI\DXUTguiIME.h" />
+    <ClInclude Include="UI\DXUTmisc.h" />
+    <ClInclude Include="UI\DXUTres.h" />
+    <ClInclude Include="UI\DXUTsettingsdlg.h" />
+    <ClInclude Include="UI\ImeUi.h" />
     <ClInclude Include="VIBuffer.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
@@ -249,6 +261,8 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SeriaRoom.cpp" />
+    <ClCompile Include="Server\ChattingManager.cpp" />
+    <ClCompile Include="Server\ContentsProcess.cpp" />
     <ClCompile Include="Server\PacketAnalyzer.cpp" />
     <ClCompile Include="Server\PacketObfuscation.cpp" />
     <ClCompile Include="Server\ServerManager.cpp" />
@@ -265,6 +279,15 @@
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UI\DXUT.cpp" />
+    <ClCompile Include="UI\DXUTcamera.cpp" />
+    <ClCompile Include="UI\DXUTenum.cpp" />
+    <ClCompile Include="UI\DXUTgui.cpp" />
+    <ClCompile Include="UI\DXUTguiIME.cpp" />
+    <ClCompile Include="UI\DXUTmisc.cpp" />
+    <ClCompile Include="UI\DXUTres.cpp" />
+    <ClCompile Include="UI\DXUTsettingsdlg.cpp" />
+    <ClCompile Include="UI\ImeUi.cpp" />
     <ClCompile Include="VIBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>

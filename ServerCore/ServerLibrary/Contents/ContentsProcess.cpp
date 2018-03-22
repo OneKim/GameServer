@@ -113,4 +113,5 @@ void ContentsProcess::C_REQ_EXIT(Session *session, Packet *rowPacket)
 	PK_S_ANS_EXIT ansPacket;
 	SLog(L"* recv exit packet by [%s]", session->clientAddress().c_str());
 	session->sendPacket(&ansPacket);
+	session->onClose();
 }

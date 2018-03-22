@@ -8,6 +8,7 @@ public:
     virtual PacketType type() = 0;
     virtual void encode(Stream &stream) { stream << (Int64) this->type(); };
     virtual void decode(Stream &stream) { };
+	virtual ~Packet() {}
 };
 
 class PK_C_REQ_EXIT : public Packet

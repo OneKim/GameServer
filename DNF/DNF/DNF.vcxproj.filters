@@ -136,8 +136,14 @@
     <Filter Include="97.Engine\03.Server\01.ServerManager">
       <UniqueIdentifier>{a7a6de3a-ff99-410f-91b7-05cd1960ffaf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.Engine\00.System\05.Memory">
-      <UniqueIdentifier>{f011f06a-5a5b-4d19-85bf-251e2c2b177e}</UniqueIdentifier>
+    <Filter Include="97.Engine\03.Server\02.Contents">
+      <UniqueIdentifier>{073dc85f-340b-4354-859a-2f572b27d41b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Engine\03.Server\03.ChattingManger">
+      <UniqueIdentifier>{6b1e1a5b-79d8-46f8-ade9-304c823b141f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Engine\03.Server\03.ChattingManger\00.UI">
+      <UniqueIdentifier>{63e9a232-0097-4326-8067-88170172a44d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +312,42 @@
     <ClInclude Include="Server\PacketAnalyzer.h">
       <Filter>97.Engine\03.Server\00.Packet</Filter>
     </ClInclude>
+    <ClInclude Include="Server\ContentsProcess.h">
+      <Filter>97.Engine\03.Server\02.Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\ThreadJobQueue.h">
+      <Filter>97.Engine\03.Server\02.Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Server\ChattingManager.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUT.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUTcamera.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUTgui.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUTguiIME.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUTmisc.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUTres.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUTsettingsdlg.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\ImeUi.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DXUTenum.h">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -415,6 +457,39 @@
     </ClCompile>
     <ClCompile Include="Server\PacketAnalyzer.cpp">
       <Filter>97.Engine\03.Server\00.Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Server\ContentsProcess.cpp">
+      <Filter>97.Engine\03.Server\02.Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="Server\ChattingManager.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUT.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUTcamera.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUTgui.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUTguiIME.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUTmisc.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUTres.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUTsettingsdlg.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ImeUi.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DXUTenum.cpp">
+      <Filter>97.Engine\03.Server\03.ChattingManger\00.UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

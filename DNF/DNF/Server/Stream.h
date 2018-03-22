@@ -8,7 +8,7 @@ class Stream
 	array<UCHAR, SOCKET_BUF_SIZE>	stream_;
 public:
 	Stream();
-	Stream(UCHAR *stream, size_t size);
+	Stream(UCHAR *stream, size_t size);	
 	void initialize();
 
 	UCHAR* data();

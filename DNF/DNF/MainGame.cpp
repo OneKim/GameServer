@@ -35,6 +35,8 @@ HRESULT CMainGame::Initialize_MainGame(void)
 
 	//FAILED_CHECK_MSG(Engine::Initialize_ServerManager(), L"Initialize_ServerManager Failed!");
 
+	FAILED_CHECK_MSG(Engine::Initialize_ChattingManager(), L"Initialize_ChattingManager Failed!");
+
 	FAILED_CHECK_MSG(Initialize_Resource(), L"Initialize_Resource Failed!");
 
 	FAILED_CHECK_MSG(Engine::Change_Scene(CSceneSelector(SCENE_SR, CLoading::LOADING_SR)), L"Change_Scene Failed!");
@@ -63,6 +65,10 @@ void CMainGame::Update(const _float& fTimeDelta)
 	Engine::Set_InputState();
 
 	Engine::Update_GameManager(fTimeDelta);
+
+	//Engine::Update_ServerManager(fTimeDelta);
+
+	Engine::Update_ChattingManager(fTimeDelta);
 }
 
 void CMainGame::Render(void)
@@ -80,9 +86,11 @@ void CMainGame::Render(void)
 
 	m_pGraphicDev->BeginScene();
 
-	Engine::Render_GameManager();	
+	Engine::Render_GameManager();
 
-	Engine::Render_Font(L"¸¼Àº °íµñ", _vec3(0.f, 0.f, 0.f), m_szFPS, _color(1.f, 1.f, 1.f, 1.f));
+	Engine::Render_ChattingManager();
+
+	Engine::Render_Font(L"¸¼Àº °íµñ", _vec3(WINSIZEX * 0.91f, 0.f, 0.f), m_szFPS, _color(0.f, 1.f, 0.f, 1.f));
 
 	m_pGraphicDev->EndScene();
 
@@ -107,6 +115,6 @@ CMainGame::~CMainGame(void)
 {
 	Engine::Release_Utility();
 	Engine::Release_Resources();
-	Engine::Release_Server();
+	//Engine::Release_Server();
 	Engine::Release_System();
 }
