@@ -1510,6 +1510,7 @@ LPARAM ImeUi_ProcessMessage( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM& lParam
 			TCHAR szCompStr[COUNTOF(g_szCompositionString)];
 
 			*trapped = true;
+			break;
 			if (NULL == (himc = _ImmGetContext(hWnd)))
 			{
 				break;
@@ -1766,8 +1767,7 @@ LPARAM ImeUi_ProcessMessage( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM& lParam
 	// input locale / keyboard layout) doesn't send WM_KEYUP message for the key that is released first. We need to check
 	// if these keys are actually up whenever we receive key up message for other keys.
 	case WM_KEYUP:
-	case WM_SYSKEYUP:
-		if ( !( lAlt & 0x80000000 ) && wParam != VK_MENU && ( GetAsyncKeyState( VK_MENU ) & 0x8000 ) == 0 )
+	case WM_SYSKEYUP:		if ( !( lAlt & 0x80000000 ) && wParam != VK_MENU && ( GetAsyncKeyState( VK_MENU ) & 0x8000 ) == 0 )
 		{
 			PostMessageA( GetFocus(), WM_KEYUP, (WPARAM)VK_MENU, ( lAlt & 0x01ff0000 ) | 0xC0000001 );
 		}	
@@ -2084,7 +2084,7 @@ void ImeUi_Uninitialize()
 	{
 		FreeLibrary(g_hImmDll);
 		g_hImmDll = NULL;
-	}
+	}	
 	g_disableCicero.Uninitialize();
 	g_bInitialized = false;
 }

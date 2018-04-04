@@ -17,6 +17,7 @@ namespace Engine
 	//For.ServerManager
 
 	// For.Getter
+	inline wstring	Get_ID(void);
 
 	// For.Setter
 	inline void		Push_Packet(Packet* pPacket);
@@ -34,6 +35,7 @@ namespace Engine
 	// For.Getter
 
 	// For.Setter
+	inline	void	Set_MsgProc(UINT message, WPARAM wParam, LPARAM lParam);
 
 	// For.General
 	inline HRESULT	Initialize_ChattingManager(void);

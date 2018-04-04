@@ -3,6 +3,10 @@
 //For.ServerManager
 
 // For.Getter
+wstring Get_ID(void)
+{
+	return ServerManager::Get_Instance()->Get_ID();
+}
 
 // For.Setter
 void Push_Packet(Packet* pPacket)
@@ -42,6 +46,10 @@ bool Send_Packet(Packet* pPacket, SOCKET_TYPE eType)
 // For.Getter
 
 // For.Setter
+void Set_MsgProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	ChattingManager::Get_Instance()->Set_MsgProc(message, wParam, lParam);
+}
 
 // For.General
 HRESULT	Initialize_ChattingManager(void)

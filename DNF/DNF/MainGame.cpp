@@ -115,6 +115,7 @@ CMainGame::~CMainGame(void)
 {
 	Engine::Release_Utility();
 	Engine::Release_Resources();
+	ChattingManager::Get_Instance().~shared_ptr();
 	//Engine::Release_Server();
 	Engine::Release_System();
 }

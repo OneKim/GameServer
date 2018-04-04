@@ -686,8 +686,8 @@ IDXGISwapChain* WINAPI DXUTGetDXGISwapChain()              { return GetDXUTState
 ID3D10RenderTargetView* WINAPI DXUTGetD3D10RenderTargetView() { return GetDXUTState().GetD3D10RenderTargetView(); }
 ID3D10DepthStencilView* WINAPI DXUTGetD3D10DepthStencilView() { return GetDXUTState().GetD3D10DepthStencilView(); }
 const DXGI_SURFACE_DESC* WINAPI DXUTGetDXGIBackBufferSurfaceDesc() { return GetDXUTState().GetBackBufferSurfaceDesc10(); }
-HINSTANCE WINAPI DXUTGetHINSTANCE()                        { return GetDXUTState().GetHInstance(); }
-HWND WINAPI DXUTGetHWND()                                  { return DXUTIsWindowed() ? GetDXUTState().GetHWNDDeviceWindowed() : GetDXUTState().GetHWNDDeviceFullScreen(); }
+HINSTANCE WINAPI DXUTGetHINSTANCE()                        { return g_hInst; }
+HWND WINAPI DXUTGetHWND()                                  { return g_hWnd; }
 HWND WINAPI DXUTGetHWNDFocus()                             { return GetDXUTState().GetHWNDFocus(); }
 HWND WINAPI DXUTGetHWNDDeviceFullScreen()                  { return GetDXUTState().GetHWNDDeviceFullScreen(); }
 HWND WINAPI DXUTGetHWNDDeviceWindowed()                    { return GetDXUTState().GetHWNDDeviceWindowed(); }

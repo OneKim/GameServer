@@ -106,6 +106,7 @@ protected:
     static CCandList s_CandList;          // Data relevant to the candidate list
     static WCHAR            s_wszReadingString[32];// Used only with horizontal reading window (why?)
     static bool s_bImeFlag;			  // Is ime enabled 
+	static HIMC hIMC;
 	
     // Color of various IME elements
     D3DCOLOR m_ReadingColor;        // Reading string color
@@ -133,7 +134,7 @@ protected:
 
 #if defined(DEBUG) || defined(_DEBUG)
     static bool    m_bIMEStaticMsgProcCalled;
-#endif
+#endif		
 };
 
 

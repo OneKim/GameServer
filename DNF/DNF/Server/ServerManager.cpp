@@ -7,7 +7,8 @@ IMPLEMENT_SINGLETON(ServerManager)
 ServerManager::ServerManager(void)
 	: m_ContentsProcess(NULL)
 	, m_ID("anjelgo")
-	, m_PASSWORD("anjelgo")		
+	, m_PASSWORD("anjelgo")
+	, m_CHARACTER(L"¿øÅ´")
 {
 
 }
@@ -147,7 +148,7 @@ void ServerManager::Push_Packet(Packet * pPacket)
 
 ServerManager::~ServerManager(void)
 {	
-	PK_C_REQ_EXIT exitPacket;
+	/*PK_C_REQ_EXIT exitPacket;
 	for (int i = 0; i < SOCKET_END; ++i)
 		this->Send_Packet(&exitPacket, (SOCKET_TYPE)i);
 
@@ -157,5 +158,5 @@ ServerManager::~ServerManager(void)
 	for (auto sock : m_Socket)
 		closesocket(sock);
 
-	WSACleanup();
+	WSACleanup();*/
 }

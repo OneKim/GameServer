@@ -12,6 +12,7 @@ private:
 	shared_ptr<ContentsProcess>	m_ContentsProcess;
 	string		m_ID;
 	string		m_PASSWORD;
+	wstring		m_CHARACTER;
 private:
 	explicit	ServerManager(void);
 	static UINT WINAPI Receive_Thread(LPVOID lpParam);
@@ -23,6 +24,7 @@ public:
 	bool		Send_Packet(Packet* pPacket, SOCKET_TYPE eType);
 	void		Push_Packet(Packet* pPacket);
 	SOCKET		Get_Socket(SOCKET_TYPE eType) { return m_Socket[eType]; }
+	wstring		Get_ID(void) { return m_CHARACTER;	}
 public:
 	~ServerManager(void);
 };

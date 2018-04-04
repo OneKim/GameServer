@@ -5,7 +5,6 @@
 #define IDC_EDITBOX2            6
 #define IDC_STATIC              10
 #define IDC_OUTPUT              12
-#define IDC_CLEAREDIT           15
 
 class ChattingManager
 {
@@ -22,7 +21,8 @@ public:
 	void						Update(const _float& fTimeDelta);
 	void						Render(void);
 	CDXUTDialog*				Get_ChattingUI(void) {	return &m_ChattingUI; }
-	CDXUTDialogResourceManager* Get_DialogResourceManager(void) { return &m_DialogResourceManager; }	
+	CDXUTDialogResourceManager* Get_DialogResourceManager(void) { return &m_DialogResourceManager; }
+	void						Set_MsgProc(UINT message, WPARAM wParam, LPARAM lParam);
 public:
 	~ChattingManager(void);
 };

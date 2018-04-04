@@ -23,10 +23,11 @@ DWORD CDXUTIMEEditBox::s_adwCompStringClause[MAX_COMPSTRING_SIZE];
 WCHAR CDXUTIMEEditBox::s_wszReadingString[32];
 CDXUTIMEEditBox::CCandList  CDXUTIMEEditBox::s_CandList;       // Data relevant to the candidate list
 bool                        CDXUTIMEEditBox::s_bImeFlag = true;
+HIMC CDXUTIMEEditBox::hIMC;
 
 
 #if defined(DEBUG) || defined(_DEBUG)
-bool      CDXUTIMEEditBox::m_bIMEStaticMsgProcCalled = false;
+bool      CDXUTIMEEditBox::m_bIMEStaticMsgProcCalled = true;
 #endif
 
 
@@ -244,7 +245,6 @@ void CDXUTIMEEditBox::OnFocusOut()
 //--------------------------------------------------------------------------------------
 bool CDXUTIMEEditBox::StaticMsgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
-
     if( !ImeUi_IsEnabled() )
         return false;
 
@@ -301,7 +301,7 @@ bool CDXUTIMEEditBox::HandleMouse( UINT uMsg, POINT pt, WPARAM wParam, LPARAM lP
     {
         case WM_LBUTTONDOWN:
         case WM_LBUTTONDBLCLK:
-            {
+		{
                 DXUTFontNode* pFont = m_pDialog->GetFont( m_Elements.GetAt( 9 )->iFont );
 
                 // Check if this click is on top of the composition string
@@ -482,10 +482,10 @@ bool CDXUTIMEEditBox::MsgProc( UINT uMsg, WPARAM wParam, LPARAM lParam )
     bool* trapped = &trappedData;
 
     *trapped = false;
-    if( !ImeUi_IsEnabled() )
-        return CDXUTEditBox::MsgProc( uMsg, wParam, lParam );
+	if (!ImeUi_IsEnabled())
+		return CDXUTEditBox::MsgProc(uMsg, wParam, lParam);
 
-    ImeUi_ProcessMessage( DXUTGetHWND(), uMsg, wParam, lParam, trapped );
+    ImeUi_ProcessMessage( g_hWnd, uMsg, wParam, lParam, trapped );
     if( *trapped == false )
         CDXUTEditBox::MsgProc( uMsg, wParam, lParam );
 
@@ -883,8 +883,16 @@ void CDXUTIMEEditBox::RenderIndicator( float fElapsedTime )
 
     pElement->FontColor.Current = m_IndicatorImeColor;
     RECT rcCalc = { 0, 0, 0, 0 };
-    // If IME system is off, draw English indicator.
-    WCHAR* pwszIndicator = ImeUi_IsEnabled() ? ImeUi_GetIndicatior() : L"En";
+    // If IME system is off, draw English indicator.	
+
+	DWORD dwConversion;
+	DWORD dwSentence;
+		
+	ImmGetConversionStatus(hIMC, &dwConversion, &dwSentence);
+
+    //WCHAR* pwszIndicator = ImeUi_IsEnabled() ? ImeUi_GetIndicatior() : L"En";	
+
+	WCHAR* pwszIndicator = (dwConversion & IME_CMODE_NATIVE) ? ImeUi_GetIndicatior() : L"En";
 
     m_pDialog->CalcTextRect( pwszIndicator, pElement, &rcCalc );
     m_pDialog->DrawText( pwszIndicator, pElement, &rc );
@@ -967,6 +975,8 @@ void CDXUTIMEEditBox::Initialize( HWND hWnd )
     
     s_CompString.SetBufferSize( MAX_COMPSTRING_SIZE );
     ImeUi_EnableIme( true );
+
+	hIMC = ::ImmGetContext(hWnd);
 }
 
 
@@ -974,6 +984,7 @@ void CDXUTIMEEditBox::Initialize( HWND hWnd )
 void CDXUTIMEEditBox::Uninitialize()
 {
     ImeUi_EnableIme( false );
+	ImmReleaseContext(g_hWnd, hIMC);
     ImeUi_Uninitialize( );
 }
 
