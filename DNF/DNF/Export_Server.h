@@ -17,17 +17,19 @@ namespace Engine
 	//For.ServerManager
 
 	// For.Getter
-	inline wstring	Get_ID(void);
+	inline wstring	Get_CHARACTER(void);
 
 	// For.Setter
 	inline void		Push_Packet(Packet* pPacket);
 	inline bool		Connect_Server(const char* pIp, _int iPort, SOCKET_TYPE eType);
 	inline void		DisConnect_Server(SOCKET_TYPE eType);
+	inline void		Set_CHARACTER(wstring wsCharacter);
 
 	// For.General
 	inline HRESULT	Initialize_ServerManager(void);
 	inline void		Update_ServerManager(const _float& fTimeDelta);
 	inline bool		Send_Packet(Packet* pPacket, SOCKET_TYPE eType);
+	inline void		Set_ChattingMsg(LPCWSTR strMsg);
 
 	/////////////////////////////////////////////////////////////
 	//For.ChattingManager

@@ -27,3 +27,20 @@ template <typename T> void Safe_Release(T& pointer)
 			pointer = NULL;
 	}
 }
+
+//------------------------------------------------------------------------//
+//문자열 변환
+
+inline void StrConvA2W(const CHAR *src, WCHAR *dest, size_t destLen) {
+	if (destLen < 1) {
+		return;
+	}
+	MultiByteToWideChar(CP_ACP, 0, src, -1, dest, (int)destLen - 1);
+}
+
+inline void StrConvW2A(const WCHAR * src, CHAR *dest, size_t destLen) {
+	if (destLen < 1) {
+		return;
+	}
+	WideCharToMultiByte(CP_ACP, 0, src, -1, dest, (int)destLen, NULL, FALSE);
+}

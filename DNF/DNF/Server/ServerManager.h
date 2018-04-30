@@ -24,7 +24,8 @@ public:
 	bool		Send_Packet(Packet* pPacket, SOCKET_TYPE eType);
 	void		Push_Packet(Packet* pPacket);
 	SOCKET		Get_Socket(SOCKET_TYPE eType) { return m_Socket[eType]; }
-	wstring		Get_ID(void) { return m_CHARACTER;	}
+	wstring		Get_CHARACTER(void) { return m_CHARACTER;	}
+	void		Set_CHARACTER(wstring wsCharactor) { m_CHARACTER = wsCharactor;	}
 public:
 	~ServerManager(void);
 };

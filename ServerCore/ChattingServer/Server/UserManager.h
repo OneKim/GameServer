@@ -6,6 +6,7 @@ class Session;
 
 class UserManager : public Singleton<UserManager>
 {
+public:
 	unordered_map<oid_t, User*>		userPool_;
 
 public:

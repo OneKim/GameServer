@@ -19,3 +19,4 @@ const _int	g_LoginServerPort		= 9000;
 const _int	g_ChattingServerPort	= 9200;
 
 #define	SOCKET_BUF_SIZE		1024 * 10
+#define CHARCTER_BUF_SIZE	32

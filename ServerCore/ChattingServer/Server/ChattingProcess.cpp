@@ -79,12 +79,15 @@ void ChattingProcess::C_REQ_CHATTING(Session *session, Packet *rowPacket)
 	PK_S_ANS_CHATTING retPacket;
 	array<char, SIZE_64> name;
 	StrConvW2A((WCHAR *)user->name().c_str(), name.data(), name.size());
-	retPacket.name_ = name.data();
-	retPacket.text_ = "-> : ";
-	retPacket.text_ += packet->text_;
+	retPacket.name_ = name.data();	
+	retPacket.text_ = packet->text_;
 
-	SLog(L"* send message %S, %S", retPacket.name_.c_str(), retPacket.text_.c_str());
-	session->sendPacket(&retPacket);
+	SLog(L"* send message %S, -> : %S", retPacket.name_.c_str(), retPacket.text_.c_str());
+
+	for(auto User : UserManager::getInstance().userPool_)
+		User.second->session()->sendPacket(&retPacket);
+
+	//session->sendPacket(&retPacket);
 }
 
 void ChattingProcess::C_REQ_EXIT(Session *session, Packet *rowPacket)

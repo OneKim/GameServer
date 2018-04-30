@@ -33,7 +33,7 @@ HRESULT CMainGame::Initialize_MainGame(void)
 
 	FAILED_CHECK_MSG(Engine::Initialize_GameManager(), L"Initialize_GameManager Failed!");
 
-	//FAILED_CHECK_MSG(Engine::Initialize_ServerManager(), L"Initialize_ServerManager Failed!");
+	FAILED_CHECK_MSG(Engine::Initialize_ServerManager(), L"Initialize_ServerManager Failed!");
 
 	FAILED_CHECK_MSG(Engine::Initialize_ChattingManager(), L"Initialize_ChattingManager Failed!");
 
@@ -66,7 +66,7 @@ void CMainGame::Update(const _float& fTimeDelta)
 
 	Engine::Update_GameManager(fTimeDelta);
 
-	//Engine::Update_ServerManager(fTimeDelta);
+	Engine::Update_ServerManager(fTimeDelta);
 
 	Engine::Update_ChattingManager(fTimeDelta);
 }
@@ -116,6 +116,6 @@ CMainGame::~CMainGame(void)
 	Engine::Release_Utility();
 	Engine::Release_Resources();
 	ChattingManager::Get_Instance().~shared_ptr();
-	//Engine::Release_Server();
+	Engine::Release_Server();
 	Engine::Release_System();
 }

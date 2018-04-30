@@ -23,6 +23,7 @@ public:
 	CDXUTDialog*				Get_ChattingUI(void) {	return &m_ChattingUI; }
 	CDXUTDialogResourceManager* Get_DialogResourceManager(void) { return &m_DialogResourceManager; }
 	void						Set_MsgProc(UINT message, WPARAM wParam, LPARAM lParam);
+	void						Set_ChattingMsg(LPCWSTR strMsg);
 public:
 	~ChattingManager(void);
 };

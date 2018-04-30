@@ -22,6 +22,7 @@ void ContentsProcess::Regist_PacketFunc(void)
 
 	INSERT_PACKET_PROCESS(S_ANS_ID_PW_SUCCESS);
 	INSERT_PACKET_PROCESS(S_ANS_EXIT);
+	INSERT_PACKET_PROCESS(S_ANS_CHATTING);
 }
 
 void ContentsProcess::Update(const _float & fTimeDelta)
@@ -83,4 +84,23 @@ void ContentsProcess::S_ANS_ID_PW_SUCCESS(Packet * pPacket)
 	PK_C_REQ_REGIST_CHATTING_NAME registPacket;
 	registPacket.name_ = packet->name_;
 	Engine::Send_Packet(&registPacket, SOCKET_LOGINCHATTING);
+
+	WCHAR temp[CHARCTER_BUF_SIZE];
+	StrConvA2W(packet->name_.c_str(), temp, CHARCTER_BUF_SIZE);	
+	Engine::Set_CHARACTER(wstring(temp, temp + wcslen(temp)));
+}
+
+void ContentsProcess::S_ANS_CHATTING(Packet* pPacket)
+{
+	PK_S_ANS_CHATTING* packet = (PK_S_ANS_CHATTING*)pPacket;
+	WCHAR tempCharcter[CHARCTER_BUF_SIZE];
+	StrConvA2W(packet->name_.c_str(), tempCharcter, CHARCTER_BUF_SIZE);
+	if (0 == wcscmp(tempCharcter, Engine::Get_CHARACTER().c_str()))
+		return;
+
+	WCHAR tempMsg[1024];
+	WCHAR tempText[1024];	
+	StrConvA2W(packet->text_.c_str(), tempText, 1024);
+	swprintf_s(tempMsg, 1024, L"%s:%s", tempCharcter, tempText);
+	Engine::Set_ChattingMsg(tempMsg);
 }

@@ -1351,7 +1351,8 @@ HRESULT CDXUTDialog::AddStatic( int ID, LPCWSTR strText, int x, int y, int width
 
     // Set the ID and list index
     pStatic->SetID( ID );
-    pStatic->SetText( strText );
+    //pStatic->SetText( strText );
+	pStatic->SetTitleText( strText );
     pStatic->SetLocation( x, y );
     pStatic->SetSize( width, height );
     pStatic->m_bIsDefault = bIsDefault;
@@ -2622,8 +2623,26 @@ CDXUTStatic::CDXUTStatic( CDXUTDialog* pDialog )
     }
 
     m_Elements.RemoveAll();
+
+	//문자열 순환큐
+	m_iSize		= 14;
+	m_iCapacity = 0;
+	m_iFront	= 0;
+	m_iRear		= -1;
+	m_lGapStr	= LONG(WINSIZEY * 0.0334f);
+
+	m_CQstrText = new WCHAR*[m_iSize];
+	for(int i = 0; i < m_iSize; ++i)
+		m_CQstrText[i] = new WCHAR[MAX_PATH];
 }
 
+
+CDXUTStatic::~CDXUTStatic()
+{
+	for (int i = 0; i < m_iSize; ++i)
+		Safe_Delete_Array(m_CQstrText[i]);
+	Safe_Delete_Array(m_CQstrText);
+}
 
 //--------------------------------------------------------------------------------------
 void CDXUTStatic::Render( float fElapsedTime )
@@ -2641,6 +2660,17 @@ void CDXUTStatic::Render( float fElapsedTime )
     pElement->FontColor.Blend( iState, fElapsedTime );
 
     m_pDialog->DrawText( m_strText, pElement, &m_rcBoundingBox, true );
+
+	RECT rcTemp		= m_rcBoundingBox;
+	int iTempIdx	= 0;
+
+	for (int i = 0; i < m_iCapacity; ++i) {
+		rcTemp.top += m_lGapStr;
+		iTempIdx = m_iFront + i;
+		if(iTempIdx >= m_iCapacity)
+			iTempIdx -= m_iCapacity;
+		m_pDialog->DrawText(m_CQstrText[iTempIdx], pElement, &rcTemp, true);		
+	}
 }
 
 
@@ -2663,17 +2693,43 @@ HRESULT CDXUTStatic::GetTextCopy( __out_ecount(bufferCount) LPWSTR strDest,
 
 //--------------------------------------------------------------------------------------
 HRESULT CDXUTStatic::SetText( LPCWSTR strText )
-{
+{	
+
     if( strText == NULL )
-    {
-        m_strText[0] = 0;
+    {        
         return S_OK;
     }
 
-    wcscpy_s( m_strText, MAX_PATH, strText );
+	//wcscpy_s(m_strText, MAX_PATH, strText);
+
+	if (m_iSize == m_iCapacity) {
+		if (++m_iFront >= m_iCapacity)
+			m_iFront = 0;
+		if(++m_iRear >= m_iCapacity)
+			m_iRear = 0;		
+	}
+	else {
+		++m_iRear;
+		++m_iCapacity;
+	}
+
+	wcscpy_s(m_CQstrText[m_iRear], MAX_PATH, strText);
+
     return S_OK;
 }
 
+
+HRESULT CDXUTStatic::SetTitleText(LPCWSTR strText)
+{
+	if (strText == NULL)
+	{
+		return S_OK;
+	}
+
+	wcscpy_s(m_strText, MAX_PATH, strText);
+
+	return S_OK;
+}
 
 //--------------------------------------------------------------------------------------
 // CDXUTButton class

@@ -656,6 +656,7 @@ class CDXUTStatic : public CDXUTControl
 {
 public:
                     CDXUTStatic( CDXUTDialog* pDialog = NULL );
+					~CDXUTStatic();
 
     virtual void    Render( float fElapsedTime );
     virtual BOOL    ContainsPoint( POINT pt )
@@ -670,10 +671,17 @@ public:
         return m_strText;
     }
     HRESULT         SetText( LPCWSTR strText );
+	HRESULT         SetTitleText(LPCWSTR strText);
 
 
 protected:
     WCHAR           m_strText[MAX_PATH];      // Window text  
+	WCHAR**         m_CQstrText;
+	int				m_iSize;
+	int				m_iCapacity;
+	int				m_iFront;
+	int				m_iRear;
+	LONG			m_lGapStr;
 };
 
 

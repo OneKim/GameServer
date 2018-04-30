@@ -21,10 +21,20 @@ void CALLBACK OnGUIEvent(UINT nEvent, int nControlID, CDXUTControl* pControl, vo
 			ChattingManager::Get_Instance()->Get_ChattingUI()->GetStatic(IDC_OUTPUT)->SetText(wszOutput);
 			((CDXUTEditBox*)pControl)->SetText(L"");*/
 
-			swprintf_s(wszOutput, 1024, L"%s : %s",
-				Engine::Get_ID().c_str(), ((CDXUTEditBox*)pControl)->GetText());
-			ChattingManager::Get_Instance()->Get_ChattingUI()->GetStatic(IDC_OUTPUT)->SetText(wszOutput);
-			((CDXUTEditBox*)pControl)->SetText(L"");
+			LPCWSTR str = ((CDXUTEditBox*)pControl)->GetText();
+			if(0 == lstrcmp(str, L"")) break;
+
+			//패킷 전송
+			PK_C_REQ_CHATTING Packet;
+			char temp[1024];
+			StrConvW2A(str, temp, 1024);
+			Packet.text_ = string(temp, temp + strlen(temp));
+			Engine::Send_Packet(&Packet, SOCKET_LOGINCHATTING);
+
+			swprintf_s(wszOutput, 1024, L"%s:%s",Engine::Get_CHARACTER().c_str(), str);
+			ChattingManager::Get_Instance()->Get_ChattingUI()->GetStatic(IDC_OUTPUT)->SetText(wszOutput);			
+			((CDXUTEditBox*)pControl)->SetText(L"");		
+
 			break;
 		}
 
@@ -58,7 +68,7 @@ void ChattingManager::Initialize_ChattingUI(void)
 	// Static	
 	//StaticControl의 위치와 크기를 설정해 줄 수 있다.
 	m_ChattingUI.AddStatic(IDC_OUTPUT,
-		L"채팅창입니다. 채팅을 출력해줍니다.",  (int)(WINSIZEX * 0.0375f), (int)(WINSIZEY * 0.075f), (int)(WINSIZEX * 0.625f), (int)(WINSIZEY * 0.5f));
+		L"채팅창입니다. 채팅을 출력해줍니다.",  (int)(WINSIZEX * 0.0375f), (int)(WINSIZEY * 0.0417f), (int)(WINSIZEX * 0.625f), (int)(WINSIZEY * 0.5f));
 	m_ChattingUI.GetStatic(IDC_OUTPUT)->SetTextColor(D3DCOLOR_ARGB(255, 0, 255, 0)); // Change color to red		//StaticControl 내부의 텍스트 색상 설정
 	m_ChattingUI.GetControl(IDC_OUTPUT)->GetElement(0)->dwTextFormat = DT_LEFT | DT_TOP | DT_WORDBREAK;			//StaticControl 내부의 텍스트 정렬 설정
 	m_ChattingUI.GetControl(IDC_OUTPUT)->GetElement(0)->iFont = 2;												//StaticControl	내부의 텍스트 폰트 설정
@@ -108,6 +118,11 @@ void ChattingManager::Set_MsgProc(UINT message, WPARAM wParam, LPARAM lParam)
 	CDXUTIMEEditBox::StaticMsgProc(g_hWnd, message, wParam, lParam);
 
 	m_ChattingUI.MsgProc(g_hWnd, message, wParam, lParam);
+}
+
+void ChattingManager::Set_ChattingMsg(LPCWSTR strMsg)
+{
+	m_ChattingUI.GetStatic(IDC_OUTPUT)->SetText(strMsg);
 }
 
 ChattingManager::~ChattingManager(void)

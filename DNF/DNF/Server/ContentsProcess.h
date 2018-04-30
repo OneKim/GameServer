@@ -18,5 +18,6 @@ public:
 	~ContentsProcess(void);
 public:
 	static void S_ANS_EXIT(Packet* pPacket);
-	static void S_ANS_ID_PW_SUCCESS(Packet* pPacket);	
+	static void S_ANS_ID_PW_SUCCESS(Packet* pPacket);
+	static void S_ANS_CHATTING(Packet* pPacket);
 };

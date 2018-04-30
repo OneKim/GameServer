@@ -3,9 +3,9 @@
 //For.ServerManager
 
 // For.Getter
-wstring Get_ID(void)
+wstring Get_CHARACTER(void)
 {
-	return ServerManager::Get_Instance()->Get_ID();
+	return ServerManager::Get_Instance()->Get_CHARACTER();
 }
 
 // For.Setter
@@ -22,6 +22,16 @@ bool Connect_Server(const char* pIp, _int iPort, SOCKET_TYPE eType)
 void DisConnect_Server(SOCKET_TYPE eType)
 {
 	ServerManager::Get_Instance()->DisConnect_Server(eType);
+}
+
+void Set_CHARACTER(wstring wsCharacter)
+{
+	ServerManager::Get_Instance()->Set_CHARACTER(wsCharacter);
+}
+
+void Set_ChattingMsg(LPCWSTR strMsg)
+{
+	ChattingManager::Get_Instance()->Set_ChattingMsg(strMsg);
 }
 
 // For.General
